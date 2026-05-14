@@ -1,0 +1,1120 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Tango Note · 単語ノート</title>
+<meta name="description" content="AI時代に、英語と能動的に向き合う習慣を取り戻すための個人ノート。">
+<meta property="og:title" content="My Tango Note">
+<meta property="og:description" content="A quiet corner for words worth keeping. 英語の輪郭が、1単語ずつ見えてくるノート。">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://mytangonote.com">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Manrope:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700;800&family=Caveat:wght@500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #FFFFFF;
+  --bg-warm: #FFFBF2;
+  --surface: #FFFFFF;
+  --ink: #1A1611;
+  --ink-soft: #5C5448;
+  --ink-faint: #9A8F7D;
+  --accent: #F26C2C;          /* warm orange */
+  --accent-deep: #D5571B;
+  --yellow: #FFD632;            /* hobonichi yellow */
+  --yellow-soft: #FFE873;
+  --pink: #FF9FB4;              /* soft accent */
+  --green: #5C8C5A;
+  --border: #EFE9DC;
+  --border-strong: #DCD0B5;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'Manrope', 'Noto Sans JP', system-ui, sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+.wrap {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+/* ===== NAV ===== */
+nav {
+  padding: 22px 0;
+  border-bottom: 1px solid var(--border);
+}
+.nav-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.brand-mark {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+}
+.brand-mark .dot {
+  width: 12px;
+  height: 12px;
+  background: var(--accent);
+  border-radius: 50%;
+  display: inline-block;
+}
+.nav-links {
+  display: flex;
+  gap: 28px;
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+}
+.nav-links a {
+  color: var(--ink-soft);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+.nav-links a:hover { color: var(--accent); }
+
+/* ===== HERO ===== */
+.hero {
+  padding: 88px 0 100px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -100px;
+  right: -100px;
+  width: 400px;
+  height: 400px;
+  background: var(--yellow);
+  border-radius: 50%;
+  opacity: 0.6;
+  z-index: -1;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: -180px;
+  left: -120px;
+  width: 320px;
+  height: 320px;
+  background: var(--pink);
+  border-radius: 50%;
+  opacity: 0.25;
+  z-index: -1;
+}
+
+.hero-eyebrow {
+  display: inline-block;
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  color: var(--ink);
+  background: var(--yellow);
+  padding: 6px 16px;
+  border-radius: 999px;
+  margin-bottom: 28px;
+}
+
+h1.hero-title {
+  font-family: 'Bricolage Grotesque', 'Noto Sans JP', sans-serif;
+  font-weight: 700;
+  font-size: clamp(54px, 8.5vw, 108px);
+  line-height: 0.95;
+  letter-spacing: -0.035em;
+  color: var(--ink);
+  margin-bottom: 28px;
+  max-width: 920px;
+}
+h1.hero-title .tango {
+  color: var(--accent);
+  font-style: italic;
+  display: inline-block;
+  position: relative;
+}
+h1.hero-title .tango::after {
+  content: '';
+  position: absolute;
+  bottom: 0.1em;
+  left: -2%;
+  width: 104%;
+  height: 0.08em;
+  background: var(--yellow);
+  z-index: -1;
+  opacity: 0.7;
+}
+
+.hero-tagline-en {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-weight: 400;
+  font-style: italic;
+  font-size: clamp(20px, 2.4vw, 28px);
+  line-height: 1.4;
+  color: var(--ink-soft);
+  margin-bottom: 8px;
+  max-width: 640px;
+}
+
+.hero-tagline-jp {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight: 500;
+  font-size: 17px;
+  color: var(--ink);
+  margin-bottom: 40px;
+  line-height: 1.6;
+}
+
+.hero-cta {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.btn {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  padding: 16px 30px;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s;
+  cursor: pointer;
+  border: 2px solid;
+  border-radius: 999px;
+}
+.btn-primary {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--bg);
+}
+.btn-primary:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+  transform: translateY(-1px);
+}
+.btn-secondary {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--bg);
+}
+.btn-secondary:hover {
+  background: var(--accent-deep);
+  border-color: var(--accent-deep);
+  transform: translateY(-1px);
+}
+.btn-ghost {
+  background: transparent;
+  border-color: var(--ink);
+  color: var(--ink);
+}
+.btn-ghost:hover {
+  background: var(--ink);
+  color: var(--bg);
+}
+
+/* ===== ISSUE STRIP ===== */
+.issue-strip {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding: 24px 0;
+  border-top: 2px solid var(--ink);
+  border-bottom: 2px solid var(--ink);
+  margin-top: 64px;
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-weight: 600;
+  font-size: 13px;
+}
+.issue-strip-label {
+  background: var(--accent);
+  color: var(--bg);
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 12px;
+}
+.issue-strip-items {
+  display: flex;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+.issue-strip-items a {
+  color: var(--ink);
+  text-decoration: none;
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  transition: color 0.15s;
+}
+.issue-strip-items a:hover { color: var(--accent); }
+.issue-strip-items .num {
+  color: var(--accent);
+  font-weight: 700;
+  font-size: 14px;
+}
+
+/* ===== CHAPTER COMMON ===== */
+.chapter {
+  padding: 110px 0;
+  position: relative;
+}
+
+.chapter-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 18px;
+}
+.chapter-tag .num-bubble {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background: var(--accent);
+  color: var(--bg);
+  border-radius: 50%;
+  font-size: 15px;
+}
+
+.chapter-title {
+  font-family: 'Bricolage Grotesque', 'Noto Sans JP', sans-serif;
+  font-weight: 700;
+  font-size: clamp(34px, 4.6vw, 52px);
+  line-height: 1.15;
+  letter-spacing: -0.022em;
+  color: var(--ink);
+  margin-bottom: 48px;
+  max-width: 880px;
+}
+.chapter-title em {
+  font-style: normal;
+  background: var(--yellow);
+  padding: 0 0.15em;
+  border-radius: 4px;
+}
+
+/* ===== CHAPTER 01: WHY ===== */
+.why-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 64px;
+  align-items: start;
+}
+.why-prose p {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 16px;
+  line-height: 2;
+  color: var(--ink);
+  margin-bottom: 22px;
+}
+.why-card {
+  background: var(--yellow);
+  padding: 44px 36px;
+  border-radius: 16px;
+  position: relative;
+  box-shadow: 0 4px 0 var(--ink);
+}
+.why-card-handwrite {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--ink);
+  margin-bottom: 16px;
+  display: block;
+  letter-spacing: 0.02em;
+}
+.why-card-quote {
+  font-family: 'Bricolage Grotesque', 'Noto Sans JP', sans-serif;
+  font-weight: 600;
+  font-size: 22px;
+  line-height: 1.55;
+  color: var(--ink);
+}
+
+/* ===== CHAPTER 02: NOTEBOOK ===== */
+.chapter-notebook { background: var(--bg-warm); }
+
+.notebook-stage {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: center;
+}
+
+/* New friendly notebook */
+.notebook-mockup {
+  position: relative;
+  width: 100%;
+  max-width: 340px;
+  aspect-ratio: 3 / 4;
+  margin: 0 auto;
+  transform: rotate(-3deg);
+  transition: transform 0.4s ease;
+}
+.notebook-mockup:hover { transform: rotate(-1.5deg) translateY(-6px); }
+
+.notebook-shadow {
+  position: absolute;
+  inset: 0;
+  border-radius: 8px;
+  background: var(--ink);
+  transform: translate(8px, 8px);
+  z-index: 0;
+}
+.notebook-pages-bg {
+  position: absolute;
+  inset: 4px -4px -4px 4px;
+  background: linear-gradient(180deg, #FFFCF0 0%, #F5EDD5 100%);
+  border-radius: 4px 8px 8px 4px;
+  z-index: 1;
+}
+.notebook-cover {
+  position: absolute;
+  inset: 0;
+  background: var(--accent);
+  border-radius: 8px;
+  border: 3px solid var(--ink);
+  z-index: 2;
+  padding: 36px 28px 28px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+}
+.notebook-cover::before {
+  /* paper sticky note decoration */
+  content: '';
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  width: 42px;
+  height: 42px;
+  background: var(--yellow);
+  transform: rotate(8deg);
+  border-radius: 2px;
+  box-shadow: 1px 2px 0 rgba(0,0,0,0.15);
+}
+.notebook-cover-label {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-weight: 700;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--bg);
+  opacity: 0.85;
+  margin-bottom: 14px;
+}
+.notebook-cover-title {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-weight: 800;
+  font-size: 38px;
+  line-height: 0.95;
+  color: var(--bg);
+  letter-spacing: -0.02em;
+}
+.notebook-cover-title .tango-cover {
+  display: block;
+  font-style: italic;
+  margin: 6px 0;
+}
+.notebook-cover-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-weight: 600;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--bg);
+  opacity: 0.7;
+}
+.notebook-elastic {
+  position: absolute;
+  right: -6px;
+  top: 12%;
+  bottom: 12%;
+  width: 10px;
+  background: var(--ink);
+  border-radius: 2px;
+  z-index: 3;
+  box-shadow: 0 3px 0 rgba(0,0,0,0.1);
+}
+
+.notebook-text h3 {
+  font-family: 'Bricolage Grotesque', 'Noto Sans JP', sans-serif;
+  font-weight: 700;
+  font-size: 30px;
+  line-height: 1.2;
+  color: var(--ink);
+  margin-bottom: 22px;
+  letter-spacing: -0.015em;
+}
+.notebook-text h3 em {
+  font-style: normal;
+  background: var(--yellow);
+  padding: 0 0.15em;
+  border-radius: 4px;
+}
+.notebook-text p {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 15px;
+  line-height: 1.9;
+  color: var(--ink-soft);
+  margin-bottom: 16px;
+}
+
+/* Featured Entry — friendlier */
+.featured-entry {
+  margin-top: 88px;
+  background: var(--surface);
+  border: 3px solid var(--ink);
+  border-radius: 20px;
+  padding: 40px 44px;
+  position: relative;
+  box-shadow: 0 6px 0 var(--ink);
+}
+.featured-entry::before {
+  content: 'Featured Entry';
+  position: absolute;
+  top: -18px;
+  left: 32px;
+  background: var(--accent);
+  color: var(--bg);
+  padding: 6px 18px;
+  border-radius: 999px;
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.05em;
+  border: 2px solid var(--ink);
+}
+
+.featured-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding-bottom: 24px;
+  border-bottom: 2px solid var(--ink);
+  margin-bottom: 28px;
+}
+.featured-head .term {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-weight: 700;
+  font-size: 44px;
+  line-height: 1;
+  color: var(--ink);
+  letter-spacing: -0.02em;
+}
+.featured-head .term .ipa {
+  font-family: 'Space Mono', monospace;
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--ink-faint);
+  margin-left: 10px;
+  letter-spacing: 0;
+}
+.featured-head .badges { display: flex; gap: 8px; }
+.featured-head .badge {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-weight: 600;
+  font-size: 12px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: 1.5px solid var(--ink);
+}
+.featured-head .badge.pos { background: var(--yellow); color: var(--ink); }
+.featured-head .badge.mode { background: var(--accent); color: var(--bg); border-color: var(--accent); }
+
+.featured-row {
+  margin-bottom: 22px;
+}
+.featured-row:last-child { margin-bottom: 0; }
+.featured-row-label {
+  display: inline-block;
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 8px;
+}
+.lang-line {
+  display: grid;
+  grid-template-columns: 30px 1fr;
+  gap: 12px;
+  margin-bottom: 6px;
+}
+.lang-line:last-child { margin-bottom: 0; }
+.lang-tag {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-weight: 700;
+  font-size: 11px;
+  color: var(--ink-faint);
+  padding-top: 4px;
+}
+.lang-text { font-size: 15px; line-height: 1.7; color: var(--ink); }
+.lang-text.jp { font-family: 'Noto Sans JP', sans-serif; }
+.lang-text.example {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-style: italic;
+}
+.lang-text.example.jp { font-family: 'Noto Sans JP', sans-serif; font-style: normal; }
+
+/* ===== CHAPTER 03: MODES ===== */
+.modes-intro {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 17px;
+  line-height: 1.85;
+  color: var(--ink-soft);
+  max-width: 680px;
+  margin-bottom: 56px;
+}
+
+.modes-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+.mode-card {
+  background: var(--surface);
+  border: 3px solid var(--ink);
+  border-radius: 16px;
+  padding: 32px 30px;
+  position: relative;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 4px 0 var(--ink);
+}
+.mode-card:hover {
+  transform: translate(-2px, -4px);
+  box-shadow: 0 8px 0 var(--ink);
+}
+.mode-card-emoji {
+  font-size: 36px;
+  margin-bottom: 14px;
+  display: block;
+}
+.mode-card-name {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-weight: 700;
+  font-size: 22px;
+  color: var(--ink);
+  margin-bottom: 4px;
+  letter-spacing: -0.01em;
+}
+.mode-card-jp {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 13px;
+  color: var(--ink-faint);
+  margin-bottom: 14px;
+}
+.mode-card-desc {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 14px;
+  line-height: 1.8;
+  color: var(--ink-soft);
+}
+.mode-card.yellow { background: var(--yellow); }
+.mode-card.pink { background: var(--pink); }
+.mode-card.cream { background: var(--bg-warm); }
+
+/* ===== CHAPTER 04: STEPS ===== */
+.steps-container {
+  display: grid;
+  gap: 24px;
+  margin-top: 16px;
+}
+.step-item {
+  display: grid;
+  grid-template-columns: 84px 1fr;
+  gap: 32px;
+  background: var(--bg-warm);
+  border: 3px solid var(--ink);
+  border-radius: 16px;
+  padding: 32px 36px;
+  align-items: start;
+  box-shadow: 0 4px 0 var(--ink);
+  transition: transform 0.2s;
+}
+.step-item:hover { transform: translateY(-2px); }
+.step-bubble {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: var(--bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-weight: 800;
+  font-size: 36px;
+  border: 3px solid var(--ink);
+}
+.step-item:nth-child(2) .step-bubble { background: var(--yellow); color: var(--ink); }
+.step-item:nth-child(3) .step-bubble { background: var(--pink); color: var(--ink); }
+.step-title {
+  font-family: 'Bricolage Grotesque', 'Noto Sans JP', sans-serif;
+  font-weight: 700;
+  font-size: 24px;
+  color: var(--ink);
+  margin-bottom: 10px;
+  letter-spacing: -0.01em;
+}
+.step-desc {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 14.5px;
+  line-height: 1.85;
+  color: var(--ink-soft);
+}
+.step-desc code {
+  font-family: 'Space Mono', monospace;
+  background: var(--yellow);
+  color: var(--ink);
+  padding: 1px 8px;
+  border-radius: 4px;
+  font-size: 0.86em;
+  font-weight: 500;
+}
+
+.steps-cta {
+  text-align: center;
+  margin-top: 56px;
+}
+
+/* ===== CLOSING ===== */
+.closing {
+  padding: 110px 0;
+  text-align: center;
+  background: var(--ink);
+  color: var(--bg);
+  position: relative;
+  overflow: hidden;
+}
+.closing::before {
+  content: '';
+  position: absolute;
+  top: 10%;
+  left: 8%;
+  width: 180px;
+  height: 180px;
+  background: var(--accent);
+  border-radius: 50%;
+  opacity: 0.5;
+  z-index: 0;
+}
+.closing::after {
+  content: '';
+  position: absolute;
+  bottom: 8%;
+  right: 6%;
+  width: 140px;
+  height: 140px;
+  background: var(--yellow);
+  border-radius: 50%;
+  opacity: 0.7;
+  z-index: 0;
+}
+.closing-inner { position: relative; z-index: 1; }
+.closing-eyebrow {
+  display: inline-block;
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  background: var(--accent);
+  color: var(--bg);
+  padding: 7px 18px;
+  border-radius: 999px;
+  margin-bottom: 36px;
+}
+.closing-quote {
+  font-family: 'Bricolage Grotesque', 'Noto Sans JP', sans-serif;
+  font-weight: 700;
+  font-size: clamp(34px, 5vw, 56px);
+  line-height: 1.2;
+  letter-spacing: -0.022em;
+  margin-bottom: 24px;
+  max-width: 880px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.closing-quote em {
+  font-style: italic;
+  color: var(--yellow);
+  font-weight: 700;
+}
+.closing-sub {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 17px;
+  color: rgba(255,255,255,0.7);
+  margin-bottom: 48px;
+}
+.closing .btn-primary {
+  background: var(--yellow);
+  border-color: var(--yellow);
+  color: var(--ink);
+}
+.closing .btn-primary:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--bg);
+}
+
+/* ===== FOOTER ===== */
+footer {
+  padding: 56px 0 40px;
+  background: var(--bg);
+  border-top: 3px solid var(--ink);
+}
+.footer-inner {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 40px;
+  align-items: start;
+}
+.footer-brand {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-weight: 700;
+  font-size: 22px;
+  color: var(--ink);
+  margin-bottom: 6px;
+  letter-spacing: -0.015em;
+}
+.footer-brand em {
+  font-style: italic;
+  background: var(--yellow);
+  padding: 0 0.15em;
+  border-radius: 4px;
+}
+.footer-tagline {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 13px;
+  color: var(--ink-soft);
+}
+.footer-col-title {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  color: var(--ink);
+  margin-bottom: 12px;
+}
+.footer-col ul { list-style: none; }
+.footer-col a {
+  display: block;
+  padding: 4px 0;
+  color: var(--ink-soft);
+  text-decoration: none;
+  font-size: 14px;
+  transition: color 0.18s;
+}
+.footer-col a:hover { color: var(--accent); }
+.footer-bottom {
+  margin-top: 40px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-weight: 500;
+  font-size: 12px;
+  color: var(--ink-faint);
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 920px) {
+  .wrap { padding: 0 22px; }
+  .nav-links { display: none; }
+  .hero { padding: 56px 0 64px; }
+  .chapter { padding: 72px 0; }
+  .why-grid { grid-template-columns: 1fr; gap: 36px; }
+  .notebook-stage { grid-template-columns: 1fr; gap: 40px; }
+  .featured-entry { padding: 32px 24px; }
+  .featured-head { flex-direction: column; align-items: flex-start; }
+  .featured-head .term { font-size: 34px; }
+  .modes-grid { grid-template-columns: 1fr; }
+  .step-item { grid-template-columns: 56px 1fr; gap: 18px; padding: 24px 22px; }
+  .step-bubble { width: 56px; height: 56px; font-size: 26px; }
+  .step-title { font-size: 20px; }
+  .closing { padding: 80px 0; }
+  .footer-inner { grid-template-columns: 1fr 1fr; gap: 32px; }
+  .footer-bottom { flex-direction: column; gap: 8px; text-align: center; }
+  .issue-strip-items { gap: 16px; }
+}
+
+@media (max-width: 540px) {
+  .footer-inner { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="wrap">
+    <div class="nav-inner">
+      <div class="brand-mark">
+        <span class="dot"></span>
+        My Tango Note
+      </div>
+      <div class="nav-links">
+        <a href="#chapter-01">Why</a>
+        <a href="#chapter-02">Notebook</a>
+        <a href="#chapter-03">Modes</a>
+        <a href="https://github.com/mytangonote/notebook" target="_blank">GitHub</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-eyebrow">単語ノート · Bilingual Vocabulary</div>
+    <h1 class="hero-title">
+      便利になるほど、<br>
+      英語を<span class="tango">覚えられない</span>。
+    </h1>
+    <div class="hero-tagline-jp">英文を訳す。「なるほど」と思う。<br>──気がつけば、覚えていない。</div>
+    <div class="hero-tagline-en">A quiet corner for words worth keeping.</div>
+    <div class="hero-cta">
+      <a class="btn btn-primary" href="https://github.com/mytangonote/notebook" target="_blank">ノートを手に入れる →</a>
+      <a class="btn btn-ghost" href="#chapter-01">どんなノート？</a>
+    </div>
+
+    <div class="issue-strip">
+      <span class="issue-strip-label">Inside</span>
+      <div class="issue-strip-items">
+        <a href="#chapter-01"><span class="num">01</span>なぜ作ったか</a>
+        <a href="#chapter-02"><span class="num">02</span>ノートの中身</a>
+        <a href="#chapter-03"><span class="num">03</span>4つのモード</a>
+        <a href="#chapter-04"><span class="num">04</span>始め方</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CHAPTER 01: WHY -->
+<section class="chapter" id="chapter-01">
+  <div class="wrap">
+    <div class="chapter-tag"><span class="num-bubble">1</span> なぜ作ったか</div>
+    <h2 class="chapter-title">AIで訳せても、<em>英単語は身につかない</em>。</h2>
+    <div class="why-grid">
+      <div class="why-prose">
+        <p>AIで仕事のスピードは爆発的に上がった。英文メールはすぐに訳してくれるし、返信案も英語で作ってくれる。英語を使ったコミュニケーションは、確かに進んでいる。</p>
+        <p>けれど、自分に「残った英語」がないことに、気がついた。</p>
+      </div>
+      <div class="why-card">
+        <span class="why-card-handwrite">My Tango Note は</span>
+        <div class="why-card-quote">英語をあなたに残す単語ノートです。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CHAPTER 02: THE NOTEBOOK -->
+<section class="chapter chapter-notebook" id="chapter-02">
+  <div class="wrap">
+    <div class="chapter-tag"><span class="num-bubble">2</span> ノートの中身</div>
+    <h2 class="chapter-title">1冊の本のように、<em>あなたの英語</em>が積まれていく。</h2>
+
+    <div class="notebook-stage">
+      <div>
+        <div class="notebook-mockup">
+          <div class="notebook-shadow"></div>
+          <div class="notebook-pages-bg"></div>
+          <div class="notebook-cover">
+            <div>
+              <div class="notebook-cover-label">Bilingual Vocabulary</div>
+              <div class="notebook-cover-title">
+                My
+                <span class="tango-cover">Tango</span>
+                Note
+              </div>
+            </div>
+            <div class="notebook-cover-bottom">
+              <span>Vol. 01</span>
+              <span>2026</span>
+            </div>
+          </div>
+          <div class="notebook-elastic"></div>
+        </div>
+      </div>
+      <div class="notebook-text">
+        <h3>1単語ずつ、<em>ちゃんと残していく</em>。</h3>
+        <p>気になった英単語をClaudeに尋ねると、その意味・例文・ニュアンスが、英語と日本語の両方で整えられて返ってきます。</p>
+        <p>集めたエントリーは、検索・フィルタ・読み上げに対応。CSVやJSONでいつでも書き出せるので、あなたの言葉は、ずっとあなたのもとに。</p>
+        <p>サーバーなし、アカウントなし、ログインなし。ブラウザ1つで動く、あなただけの単語ノートです。</p>
+      </div>
+    </div>
+
+    <!-- Featured Entry -->
+    <div class="featured-entry">
+      <div class="featured-head">
+        <div class="term">transparency<span class="ipa">/trænsˈpærənsi/</span></div>
+        <div class="badges">
+          <span class="badge pos">noun</span>
+          <span class="badge mode">💼 Business</span>
+        </div>
+      </div>
+      <div class="featured-row">
+        <span class="featured-row-label">Meaning</span>
+        <div class="lang-line"><div class="lang-tag">EN</div><div class="lang-text">The quality of being open and accountable — sharing information so decisions can be clearly seen.</div></div>
+        <div class="lang-line"><div class="lang-tag">JP</div><div class="lang-text jp">情報や意思決定のプロセスを隠さず開示する性質。組織運営や政治の文脈では「説明責任を伴う開示」というニュアンス。</div></div>
+      </div>
+      <div class="featured-row">
+        <span class="featured-row-label">Example</span>
+        <div class="lang-line"><div class="lang-tag">EN</div><div class="lang-text example">The new leadership has prioritized transparency — they share weekly updates on company performance.</div></div>
+        <div class="lang-line"><div class="lang-tag">JP</div><div class="lang-text example jp">新しい経営陣は透明性を最優先にしている。業績の数字も含めて、週次で全社に共有している。</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CHAPTER 03: MODES -->
+<section class="chapter" id="chapter-03">
+  <div class="wrap">
+    <div class="chapter-tag"><span class="num-bubble">3</span> 4つのモード</div>
+    <h2 class="chapter-title">同じ単語でも、<em>あなたの文脈で例文が変わる</em>。</h2>
+    <p class="modes-intro">ビジネスで使う "conflict" と、文学で語られる "conflict" は、同じ言葉でもまるで別もの。あなたの読む文脈、書く文脈に合わせて、Claudeが例文と注釈を整えます。</p>
+
+    <div class="modes-grid">
+      <div class="mode-card">
+        <span class="mode-card-emoji">💼</span>
+        <div class="mode-card-name">Business</div>
+        <div class="mode-card-jp">ビジネス</div>
+        <div class="mode-card-desc">ミーティング、メール、プレゼン、マネジメント。仕事で使う英語の精度を、一語ずつ確かなものに。</div>
+      </div>
+      <div class="mode-card yellow">
+        <span class="mode-card-emoji">📚</span>
+        <div class="mode-card-name">Literature / Academic</div>
+        <div class="mode-card-jp">文学・学術</div>
+        <div class="mode-card-desc">本、論文、エッセイ、知的な引用。読む英語の質感を、深く味わうために。</div>
+      </div>
+      <div class="mode-card cream">
+        <span class="mode-card-emoji">☕</span>
+        <div class="mode-card-name">Casual</div>
+        <div class="mode-card-jp">日常会話</div>
+        <div class="mode-card-desc">友人との会話、SNS、軽い雑談。自然な英語の温度を、自分のものに。</div>
+      </div>
+      <div class="mode-card pink">
+        <span class="mode-card-emoji">📰</span>
+        <div class="mode-card-name">News / Current Affairs</div>
+        <div class="mode-card-jp">時事・報道</div>
+        <div class="mode-card-desc">ジャーナリズム、社会・政治・経済の定型表現。世界の出来事を、一次情報で読み解くために。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CHAPTER 04: STEPS -->
+<section class="chapter" id="chapter-04" style="background: var(--bg-warm);">
+  <div class="wrap">
+    <div class="chapter-tag"><span class="num-bubble">4</span> 始め方</div>
+    <h2 class="chapter-title">3つのステップで、<em>今日から始められる</em>。</h2>
+
+    <div class="steps-container">
+      <div class="step-item">
+        <div class="step-bubble">1</div>
+        <div>
+          <div class="step-title">ノートをダウンロード</div>
+          <div class="step-desc">GitHubから <code>index.html</code> をダウンロードして、好きな場所に保存。ブラウザでダブルクリックして開けば、それがあなたの単語ノートです。サーバーは不要、ローカルファイルとして完結します。</div>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-bubble">2</div>
+        <div>
+          <div class="step-title">Claudeに、最初のメッセージを送る</div>
+          <div class="step-desc">GitHubのREADMEにある「スターターメッセージ」をClaudeにコピペするだけ。これで、あなたが英単語を尋ねるたびに、整えられたエントリーが返ってくるようになります。</div>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-bubble">3</div>
+        <div>
+          <div class="step-title">気になった単語を、ぽつぽつと</div>
+          <div class="step-desc">英語を読んでいて出会った単語、ふと気になったフレーズをClaudeに尋ねる。返ってきたエントリーを、ひとつずつノートに加えていく。100単語覚えようとせず、3単語をちゃんと残す。そんな関わり方で。</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="steps-cta">
+      <a class="btn btn-secondary" href="https://github.com/mytangonote/notebook" target="_blank">GitHubを開く →</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="footer-inner">
+      <div>
+        <div class="footer-brand">My <em>Tango</em> Note</div>
+        <div class="footer-tagline">A quiet corner for words worth keeping.</div>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Project</div>
+        <ul>
+          <li><a href="https://github.com/mytangonote/notebook" target="_blank">GitHub</a></li>
+          <li><a href="https://github.com/mytangonote/notebook#license" target="_blank">MIT License</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Follow</div>
+        <ul>
+          <li><a href="https://x.com/mytangonote" target="_blank">X / Twitter</a></li>
+          <li><a href="https://note.com/mytangonote" target="_blank">note</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Made with</div>
+        <ul>
+          <li><a href="https://claude.ai" target="_blank">Claude</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 My Tango Note</span>
+      <span>Made with care + Claude</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
