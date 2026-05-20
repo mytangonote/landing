@@ -713,6 +713,53 @@ h1.hero-title .tango::after {
   font-weight: 500;
 }
 
+/* Step Visual — image/gif demonstration */
+.step-visual {
+  margin-top: 20px;
+  background: var(--surface);
+  border: 2.5px solid var(--ink);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 0 var(--ink);
+  position: relative;
+}
+.step-visual img,
+.step-visual video {
+  display: block;
+  width: 100%;
+  height: auto;
+  background: var(--bg-warm);
+  min-height: 120px;
+}
+/* Fallback when image fails to load (before Mark uploads them) */
+.step-visual img[alt]:after {
+  content: '📷 ' attr(alt);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  text-align: center;
+  background: var(--bg-warm);
+  color: var(--ink-faint);
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  width: 100%;
+  min-height: 120px;
+  box-sizing: border-box;
+}
+.step-visual-caption {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--ink-faint);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 10px 16px;
+  background: var(--bg-warm);
+  border-top: 1.5px dashed var(--border-strong);
+}
+
 .steps-cta {
   text-align: center;
   margin-top: 56px;
@@ -1055,21 +1102,33 @@ footer {
         <div class="step-bubble">1</div>
         <div>
           <div class="step-title">ノートをダウンロード</div>
-          <div class="step-desc">GitHubから <code>index.html</code> をダウンロードして、好きな場所に保存。ブラウザでダブルクリックして開けば、それがあなたの単語ノートです。サーバーは不要、ローカルファイルとして完結します。</div>
+          <div class="step-desc">GitHub から ZIP を一括ダウンロード、もしくは <code>index.html</code> を個別保存。ダブルクリックで開けば、それがあなたの単語ノートです。同梱の <code>examples.html</code> は完成イメージの見本として参考になります。サーバー不要、すべてローカルで完結します。</div>
+          <div class="step-visual">
+            <img src="assets/step1-download.png" alt="GitHub の Code ボタンから Download ZIP を選択する画面">
+            <div class="step-visual-caption">GitHub → Code → Download ZIP</div>
+          </div>
         </div>
       </div>
       <div class="step-item">
         <div class="step-bubble">2</div>
         <div>
-          <div class="step-title">Claudeに、最初のメッセージを送る</div>
-          <div class="step-desc">GitHubのREADMEにある「スターターメッセージ」をClaudeにコピペするだけ。これで、あなたが英単語を尋ねるたびに、整えられたエントリーが返ってくるようになります。</div>
+          <div class="step-title">AI に、最初のメッセージを送る</div>
+          <div class="step-desc">GitHub の README にある「スタータープロンプト」を、お使いの AI(<strong>Claude / ChatGPT / Gemini</strong>)にコピペするだけ。これで、英単語を尋ねるたびに、整えられたエントリーが返ってくるようになります。</div>
+          <div class="step-visual">
+            <img src="assets/step2-prompt.png" alt="AI にスタータープロンプトを送り、My Tango Note の準備ができましたと返答される画面">
+            <div class="step-visual-caption">「My Tango Note の準備ができました」と返ってきたら、準備完了</div>
+          </div>
         </div>
       </div>
       <div class="step-item">
         <div class="step-bubble">3</div>
         <div>
-          <div class="step-title">気になった単語を、ぽつぽつと</div>
-          <div class="step-desc">英語を読んでいて出会った単語、ふと気になったフレーズをClaudeに尋ねる。返ってきたエントリーを、ひとつずつノートに加えていく。100単語覚えようとせず、3単語をちゃんと残す。そんな関わり方で。</div>
+          <div class="step-title">単語を尋ねて、ノートに加えていく</div>
+          <div class="step-desc">気になった英単語を AI に尋ね、返ってきた塊をノートの「<strong>単語を追加</strong>」エリアに貼り付け。<strong>追加 →</strong> ボタンひとつで、エントリーが整って並びます。追加した内容は自動で保存され、いつでも HTML としてダウンロードして手元に残せます。</div>
+          <div class="step-visual">
+            <img src="assets/step3-add.gif" alt="AI の返答をコピーしてノートに貼り付け、追加ボタンを押すとエントリーが現れる流れ">
+            <div class="step-visual-caption">コピー → 貼り付け → 追加 →エントリー完成</div>
+          </div>
         </div>
       </div>
     </div>
