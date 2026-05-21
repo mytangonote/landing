@@ -713,6 +713,27 @@ h1.hero-title .tango::after {
   font-weight: 500;
 }
 
+/* Step Tip — small helper line under step-desc */
+.step-tip {
+  margin-top: 12px;
+  padding: 10px 14px;
+  background: var(--bg-warm);
+  border-left: 3px solid var(--accent);
+  border-radius: 6px;
+  font-family: 'Noto Sans JP', 'Manrope', sans-serif;
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--ink-soft);
+}
+.step-tip code {
+  font-family: 'Space Mono', monospace;
+  background: rgba(0, 0, 0, 0.05);
+  color: var(--ink);
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-size: 0.9em;
+}
+
 /* Step Visual — image/gif demonstration */
 .step-visual {
   margin-top: 20px;
@@ -1103,6 +1124,7 @@ footer {
         <div>
           <div class="step-title">ノートをダウンロード</div>
           <div class="step-desc">GitHub から ZIP を一括ダウンロード、もしくは <code>index.html</code> を個別保存。ダブルクリックで開けば、それがあなたの単語ノートです。同梱の <code>examples.html</code> は完成イメージの見本として参考になります。サーバー不要、すべてローカルで完結します。</div>
+          <div class="step-tip">💡 ダウンロードした <code>index.html</code> をブラウザで開いたら、お気に入り(ブックマーク)に登録しておくと便利です。いつでも 1 クリックで自分のノートに戻れます。</div>
           <div class="step-visual">
             <img src="assets/step1-download.png" alt="GitHub の Code ボタンから Download ZIP を選択する画面">
             <div class="step-visual-caption">GitHub → Code → Download ZIP</div>
