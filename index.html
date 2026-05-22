@@ -786,6 +786,117 @@ h1.hero-title .tango::after {
   margin-top: 56px;
 }
 
+/* ===== KIT FILES LIST (Step 1) ===== */
+.kit-files {
+  margin-top: 18px;
+  padding: 18px 22px;
+  background: var(--bg-warm);
+  border: 2px solid var(--ink);
+  border-radius: 12px;
+  box-shadow: 0 3px 0 var(--ink);
+}
+.kit-files-title {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--ink);
+  letter-spacing: 0.02em;
+  margin-bottom: 12px;
+}
+.kit-files ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.kit-files li {
+  font-family: 'Noto Sans JP', 'Manrope', sans-serif;
+  font-size: 13.5px;
+  line-height: 1.7;
+  color: var(--ink-soft);
+  padding-left: 8px;
+}
+.kit-files li code {
+  font-family: 'Space Mono', monospace;
+  background: rgba(0, 0, 0, 0.06);
+  color: var(--ink);
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-size: 0.9em;
+  margin-right: 4px;
+}
+
+/* ===== STEP 1 DOWNLOAD BUTTON ===== */
+.step-download {
+  margin-top: 24px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 20px;
+}
+.btn-download-kit {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--bg);
+  background: var(--ink);
+  padding: 16px 28px;
+  border: 2.5px solid var(--ink);
+  border-radius: 999px;
+  text-decoration: none;
+  box-shadow: 0 4px 0 var(--accent);
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+.btn-download-kit:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 0 var(--accent);
+}
+.btn-download-kit:active {
+  transform: translateY(1px);
+  box-shadow: 0 2px 0 var(--accent);
+}
+.download-icon {
+  font-size: 18px;
+  line-height: 1;
+}
+.download-label {
+  letter-spacing: 0.01em;
+}
+.download-size {
+  font-size: 11px;
+  font-weight: 500;
+  opacity: 0.7;
+  letter-spacing: 0.05em;
+}
+.link-github {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ink-faint);
+  text-decoration: none;
+  border-bottom: 1px solid var(--ink-faint);
+  padding-bottom: 1px;
+  transition: color 0.15s, border-color 0.15s;
+}
+.link-github:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+@media (max-width: 720px) {
+  .step-download {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+  }
+  .btn-download-kit {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
 /* ===== CLOSING ===== */
 .closing {
   padding: 110px 0;
@@ -1191,12 +1302,25 @@ footer {
       <div class="step-item">
         <div class="step-bubble">1</div>
         <div>
-          <div class="step-title">ノートをダウンロード</div>
-          <div class="step-desc">GitHub から ZIP を一括ダウンロード、もしくは <code>index.html</code> を個別保存。ダブルクリックで開けば、それがあなたの単語ノートです。同梱の <code>examples.html</code> は完成イメージの見本として参考になります。サーバー不要、すべてローカルで完結します。</div>
-          <div class="step-tip">💡 ダウンロードした <code>index.html</code> をブラウザで開いたら、お気に入り(ブックマーク)に登録しておくと便利です。いつでも 1 クリックで自分のノートに戻れます。</div>
-          <div class="step-visual">
-            <img src="assets/step1-download.png" alt="GitHub の Code ボタンから Download ZIP を選択する画面">
-            <div class="step-visual-caption">GitHub → Code → Download ZIP</div>
+          <div class="step-title">キットをダウンロード</div>
+          <div class="step-desc">下の「キットをダウンロード」 ボタンを押すと、ZIP ファイルが手に入ります。解凍すると <strong>MyTangoNote</strong> フォルダの中に、説明書・AI設定プロンプト・単語ノート本体・サンプルの 4 つのファイルが入っています。サーバー不要、すべてローカルで完結します。</div>
+          <div class="kit-files">
+            <div class="kit-files-title">📦 MyTangoNote フォルダの中身</div>
+            <ul>
+              <li><code>01.説明書.txt</code> — まずこれを読む</li>
+              <li><code>02.AI設定プロンプト.txt</code> — AI に最初に送る言葉</li>
+              <li><code>03.MyTangoNote.html</code> — あなたの単語ノート(本体)</li>
+              <li><code>04.サンプルMyTangoNote.html</code> — 完成イメージの見本</li>
+            </ul>
+          </div>
+          <div class="step-tip">💡 開いた <code>03.MyTangoNote.html</code> をブラウザのお気に入り(ブックマーク)に登録しておくと、いつでも 1 クリックで自分のノートに戻れます。</div>
+          <div class="step-download">
+            <a class="btn-download-kit" href="/MyTangoNote.zip" download>
+              <span class="download-icon">📥</span>
+              <span class="download-label">キットをダウンロード</span>
+              <span class="download-size">(ZIP · 約 30KB)</span>
+            </a>
+            <a class="link-github" href="https://github.com/mytangonote/notebook" target="_blank" rel="noopener">GitHub から DL はこちら →</a>
           </div>
         </div>
       </div>
