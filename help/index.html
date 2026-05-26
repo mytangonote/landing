@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>よくある質問 | My Tango Note</title>
+<meta name="description" content="My Tango Note について、よくいただくご質問にお答えしています。">
+<meta property="og:title" content="よくある質問 | My Tango Note">
+<meta property="og:description" content="My Tango Note について、よくいただくご質問にお答えしています。">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://mytangonote.com/help">
+<meta property="og:image" content="https://mytangonote.com/og-image.png">
+<meta property="og:site_name" content="My Tango Note">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --bg: #FFFFFF;
+  --bg-warm: #FFFBF2;
+  --surface: #FFFFFF;
+  --ink: #1A1611;
+  --ink-soft: #5C5448;
+  --ink-faint: #9A8F7D;
+  --accent: #F26C2C;
+  --accent-deep: #D5571B;
+  --yellow: #FFD632;
+  --yellow-soft: #FFE873;
+  --pink: #FF9FB4;
+  --border: #EFE9DC;
+  --border-strong: #DCD0B5;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg-warm);
+  color: var(--ink);
+  font-family: 'Manrope', 'Noto Sans JP', system-ui, sans-serif;
+  font-size: 16px;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.container {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ===== TOP NAV ===== */
+.top-nav {
+  padding: 28px 0 24px;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg-warm);
+}
+.top-nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.brand-mark {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: var(--ink);
+}
+.brand-dot {
+  width: 14px;
+  height: 14px;
+  background: var(--accent);
+  border-radius: 50%;
+}
+.brand-name {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+.back-to-lp {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ink-soft);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: color 0.15s, border-color 0.15s;
+}
+.back-to-lp:hover {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+
+/* ===== HEADER ===== */
+.help-header {
+  padding: 80px 0 60px;
+  text-align: center;
+}
+.help-eyebrow {
+  display: inline-block;
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--ink);
+  background: var(--yellow);
+  padding: 6px 18px;
+  border-radius: 999px;
+  margin-bottom: 24px;
+  letter-spacing: 0.04em;
+}
+.help-title {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: 48px;
+  font-weight: 700;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+  margin-bottom: 16px;
+}
+.help-subtitle {
+  font-family: 'Noto Sans JP', 'Manrope', sans-serif;
+  font-size: 15px;
+  color: var(--ink-soft);
+  line-height: 1.85;
+}
+
+/* ===== FAQ CATEGORIES ===== */
+.faq-section {
+  padding-bottom: 80px;
+}
+.faq-category {
+  margin-bottom: 56px;
+}
+.faq-category-title {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 24px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid var(--ink);
+  display: inline-block;
+}
+.faq-item {
+  margin-bottom: 32px;
+  padding: 24px 28px;
+  background: var(--bg);
+  border: 1.5px solid var(--border-strong);
+  border-radius: 12px;
+  transition: border-color 0.2s;
+}
+.faq-item:hover {
+  border-color: var(--ink-faint);
+}
+.faq-item:last-child {
+  margin-bottom: 0;
+}
+.faq-q {
+  font-family: 'Noto Sans JP', 'Manrope', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 14px;
+  line-height: 1.55;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+.faq-q::before {
+  content: 'Q.';
+  font-family: 'Bricolage Grotesque', sans-serif;
+  color: var(--accent);
+  font-weight: 800;
+  flex-shrink: 0;
+}
+.faq-a {
+  font-family: 'Noto Sans JP', 'Manrope', sans-serif;
+  font-size: 14.5px;
+  line-height: 1.9;
+  color: var(--ink-soft);
+  padding-left: 32px;
+}
+.faq-a p {
+  margin: 0 0 12px 0;
+}
+.faq-a p:last-child {
+  margin-bottom: 0;
+}
+.faq-a code {
+  font-family: 'Space Mono', monospace;
+  background: rgba(0, 0, 0, 0.06);
+  color: var(--ink);
+  padding: 2px 7px;
+  border-radius: 4px;
+  font-size: 0.92em;
+}
+
+/* ===== CTA BLOCK ===== */
+.help-cta {
+  margin-top: 48px;
+  padding: 40px 32px;
+  background: var(--ink);
+  color: var(--bg-warm);
+  border-radius: 16px;
+  text-align: center;
+}
+.help-cta-text {
+  font-family: 'Noto Sans JP', 'Manrope', sans-serif;
+  font-size: 14.5px;
+  line-height: 1.85;
+  margin-bottom: 20px;
+  opacity: 0.92;
+}
+.help-cta-link {
+  display: inline-block;
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--ink);
+  background: var(--yellow);
+  padding: 14px 28px;
+  border-radius: 999px;
+  text-decoration: none;
+  transition: transform 0.15s;
+}
+.help-cta-link:hover {
+  transform: translateY(-2px);
+}
+
+/* ===== FOOTER ===== */
+.help-footer {
+  padding: 40px 0 60px;
+  border-top: 1px solid var(--border);
+  text-align: center;
+}
+.help-footer-text {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: 12px;
+  color: var(--ink-faint);
+  letter-spacing: 0.08em;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 720px) {
+  .help-header {
+    padding: 60px 0 40px;
+  }
+  .help-title {
+    font-size: 36px;
+  }
+  .help-subtitle {
+    font-size: 14px;
+  }
+  .faq-category-title {
+    font-size: 16px;
+  }
+  .faq-item {
+    padding: 20px 22px;
+  }
+  .faq-q {
+    font-size: 15px;
+  }
+  .faq-a {
+    font-size: 13.5px;
+    padding-left: 28px;
+  }
+  .help-cta {
+    padding: 32px 24px;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- TOP NAV -->
+<header class="top-nav">
+  <div class="container top-nav-inner">
+    <a class="brand-mark" href="/">
+      <span class="brand-dot"></span>
+      <span class="brand-name">My Tango Note</span>
+    </a>
+    <a class="back-to-lp" href="/">← LP に戻る</a>
+  </div>
+</header>
+
+<!-- HEADER -->
+<section class="help-header">
+  <div class="container">
+    <div class="help-eyebrow">よくある質問</div>
+    <h1 class="help-title">Help & Q&amp;A</h1>
+    <p class="help-subtitle">
+      My Tango Note について、よくいただくご質問にお答えしています。<br>
+      お探しの内容が見つからない場合は、フィードバックフォームよりお気軽にどうぞ。
+    </p>
+  </div>
+</section>
+
+<!-- FAQ -->
+<main class="faq-section">
+  <div class="container">
+
+    <!-- カテゴリ 1: AI とパーソナライズ -->
+    <section class="faq-category">
+      <h2 class="faq-category-title">AI とパーソナライズについて</h2>
+
+      <div class="faq-item">
+        <div class="faq-q">AI が、私のことを知っているような例文を返してきます。なぜですか?</div>
+        <div class="faq-a">
+          <p>My Tango Note のキット自体には、個人情報は含まれていません。このキットは、どなたが使っても同じ内容のプロンプトでできています。</p>
+          <p>パーソナライズされた例文が返ってくる場合、ご利用中の AI 側のメモリ機能が、過去の会話から覚えたことを例文に反映している可能性があります。My Tango Note の側では何かを記録しているわけではございませんので、安心して使っていただければと思います。</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">私の情報が、他のユーザーに共有されることはありますか?</div>
+        <div class="faq-a">
+          <p>共有されることはございません。</p>
+          <p>AI のメモリは、ご自身のアカウントの中に閉じていて、別の方が同じ My Tango Note を使っても、その方の例文に情報が出ることはない仕組みです。</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">パーソナライズが不要なときは、どうすればよいですか?</div>
+        <div class="faq-a">
+          <p>AI のメモリ機能をオフにする、もしくは新しいチャットで My Tango Note を始めると、メモリの影響を受けない例文が返ってきます。</p>
+          <p>Claude や ChatGPT などには、それぞれ設定画面でメモリ機能のオン・オフを切り替える項目があります。お使いの AI で「メモリ」「個人化」 などの項目を探してみてください。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- カテゴリ 2: データと保存 -->
+    <section class="faq-category">
+      <h2 class="faq-category-title">データと保存について</h2>
+
+      <div class="faq-item">
+        <div class="faq-q">ノートのデータは、どこに保存されますか?</div>
+        <div class="faq-a">
+          <p>追加した単語データは、お使いのブラウザの中だけに保存されます。外のサーバーには送信されないので、データは手元にのみ残ります。</p>
+          <p>ノート画面右下の「📥 ノートをダウンロード」 を押すと、そのときの状態を HTML ファイルとして手元に保存できます。別の端末で続きを使いたいときは、ダウンロードしたファイルを開けばそのまま続けられます。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA: LP に戻る/ フィードバック -->
+    <div class="help-cta">
+      <p class="help-cta-text">
+        ご質問、ご要望、もしくは「ここの説明がわかりにくい」 など、<br>
+        フィードバックがありましたらお気軽にお寄せください。
+      </p>
+      <a class="help-cta-link" href="/#feedback">フィードバックを送る →</a>
+    </div>
+
+  </div>
+</main>
+
+<!-- FOOTER -->
+<footer class="help-footer">
+  <div class="container">
+    <div class="help-footer-text">© My Tango Note · A quiet corner for words worth keeping.</div>
+  </div>
+</footer>
+
+</body>
+</html>
