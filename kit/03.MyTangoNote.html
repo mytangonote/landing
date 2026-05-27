@@ -1,0 +1,1268 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Tango Note · 単語ノート</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Manrope:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #FFFFFF;
+  --bg-warm: #FFFBF2;
+  --surface: #FFFFFF;
+  --ink: #1A1611;
+  --ink-soft: #5C5448;
+  --ink-faint: #9A8F7D;
+  --accent: #F26C2C;
+  --accent-deep: #D5571B;
+  --yellow: #FFD632;
+  --yellow-soft: #FFE873;
+  --pink: #FF9FB4;
+  --green: #5C8C5A;
+  --border: #EFE9DC;
+  --border-strong: #DCD0B5;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'Manrope', 'Noto Sans JP', system-ui, sans-serif;
+  font-size: 15px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+}
+
+.container {
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 40px 28px 96px;
+}
+
+/* ===== HEADER ===== */
+.header {
+  margin-bottom: 36px;
+  padding-bottom: 28px;
+  border-bottom: 2px solid var(--ink);
+}
+
+.brand-mark {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--ink);
+  letter-spacing: -0.005em;
+  margin-bottom: 20px;
+}
+.brand-mark .dot {
+  width: 10px; height: 10px;
+  background: var(--accent);
+  border-radius: 50%;
+}
+
+.eyebrow {
+  display: inline-block;
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  background: var(--yellow);
+  color: var(--ink);
+  padding: 5px 12px;
+  border-radius: 999px;
+  margin-bottom: 14px;
+}
+
+h1 {
+  font-family: 'Bricolage Grotesque', 'Noto Sans JP', sans-serif;
+  font-weight: 700;
+  font-size: clamp(36px, 5vw, 52px);
+  line-height: 0.98;
+  letter-spacing: -0.025em;
+  color: var(--ink);
+}
+h1 .tango {
+  font-style: italic;
+  color: var(--accent);
+  display: inline-block;
+  position: relative;
+}
+h1 .tango::after {
+  content: '';
+  position: absolute;
+  bottom: 0.08em; left: -2%;
+  width: 104%; height: 0.1em;
+  background: var(--yellow);
+  z-index: -1;
+  opacity: 0.85;
+}
+
+.tagline {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 16px;
+  color: var(--ink-soft);
+  margin-top: 10px;
+}
+
+/* ===== TOOLBAR ===== */
+.toolbar {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 16px;
+  margin-bottom: 24px;
+  align-items: center;
+}
+
+.search-wrap {
+  position: relative;
+}
+.search-input {
+  width: 100%;
+  padding: 14px 18px 14px 44px;
+  font-family: 'Manrope', 'Noto Sans JP', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--ink);
+  background: var(--surface);
+  border: 2px solid var(--ink);
+  border-radius: 999px;
+  box-shadow: 0 3px 0 var(--ink);
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+.search-input:focus {
+  outline: none;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 0 var(--ink);
+}
+.search-input::placeholder { color: var(--ink-faint); }
+.search-icon {
+  position: absolute;
+  left: 16px; top: 50%;
+  transform: translateY(-50%);
+  width: 18px; height: 18px;
+  color: var(--ink-soft);
+  pointer-events: none;
+}
+
+.sort-wrap { position: relative; }
+.sort-select {
+  appearance: none;
+  -webkit-appearance: none;
+  padding: 14px 40px 14px 18px;
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink);
+  background: var(--surface);
+  border: 2px solid var(--ink);
+  border-radius: 999px;
+  box-shadow: 0 3px 0 var(--ink);
+  cursor: pointer;
+  transition: transform 0.15s;
+}
+.sort-select:hover { transform: translateY(-1px); box-shadow: 0 4px 0 var(--ink); }
+.sort-select:focus { outline: none; }
+.sort-wrap::after {
+  content: '▾';
+  position: absolute;
+  right: 16px; top: 50%;
+  transform: translateY(-50%);
+  color: var(--ink);
+  font-size: 12px;
+  pointer-events: none;
+}
+
+/* ===== FILTER CHIPS ===== */
+.filter-bar {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 28px;
+  flex-wrap: wrap;
+}
+.filter-chip {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ink);
+  background: var(--surface);
+  padding: 8px 16px;
+  border: 2px solid var(--ink);
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all 0.15s;
+  text-transform: capitalize;
+}
+.filter-chip:hover {
+  background: var(--yellow);
+}
+.filter-chip.active {
+  background: var(--ink);
+  color: var(--bg);
+  box-shadow: 0 3px 0 var(--accent);
+  transform: translateY(-1px);
+}
+
+/* ===== STATS ===== */
+.stats-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 14px 20px;
+  background: var(--bg-warm);
+  border: 2px solid var(--ink);
+  border-radius: 14px;
+  box-shadow: 0 3px 0 var(--ink);
+  margin-bottom: 32px;
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-weight: 600;
+  font-size: 13px;
+}
+.stats-row .count {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.stats-row .count strong {
+  font-size: 18px;
+  color: var(--accent);
+}
+.export-group {
+  display: flex;
+  gap: 8px;
+}
+.btn-export {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ink);
+  background: var(--surface);
+  padding: 7px 14px;
+  border: 2px solid var(--ink);
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.btn-export:hover {
+  background: var(--ink);
+  color: var(--bg);
+}
+
+/* ===== ENTRIES ===== */
+.entries {
+  display: grid;
+  gap: 20px;
+}
+
+.entry {
+  background: var(--surface);
+  border: 2.5px solid var(--ink);
+  border-radius: 16px;
+  padding: 28px 30px;
+  box-shadow: 0 4px 0 var(--ink);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.entry:hover {
+  transform: translate(-1px, -2px);
+  box-shadow: 0 6px 0 var(--ink);
+}
+
+.entry-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 20px;
+  padding-bottom: 16px;
+  border-bottom: 1.5px dashed var(--border-strong);
+}
+
+.entry-phrase {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-weight: 700;
+  font-size: clamp(22px, 2.6vw, 28px);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.entry-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 6px;
+  flex-shrink: 0;
+}
+.entry-type {
+  display: inline-block;
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  color: var(--ink);
+  background: var(--yellow);
+  padding: 4px 11px;
+  border: 1.5px solid var(--ink);
+  border-radius: 999px;
+  text-transform: capitalize;
+  white-space: nowrap;
+}
+.entry-date {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  color: var(--ink-faint);
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.entry-section {
+  margin-bottom: 18px;
+}
+.entry-section:last-child { margin-bottom: 0; }
+
+.section-label {
+  display: inline-block;
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 8px;
+}
+
+.lang-row {
+  display: grid;
+  grid-template-columns: 28px 1fr;
+  gap: 12px;
+  margin-bottom: 6px;
+  align-items: start;
+}
+.lang-row:last-child { margin-bottom: 0; }
+
+.lang-tag {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--ink-faint);
+  letter-spacing: 0.05em;
+  padding-top: 4px;
+}
+
+.lang-text {
+  font-size: 14.5px;
+  line-height: 1.7;
+  color: var(--ink);
+}
+.lang-text.jp {
+  font-family: 'Noto Sans JP', sans-serif;
+}
+.lang-text.example {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-style: italic;
+  font-weight: 400;
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+.lang-text.example.jp {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-style: normal;
+}
+
+.entry-notes {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 13px;
+  line-height: 1.85;
+  color: var(--ink-soft);
+  padding: 14px 18px;
+  background: var(--bg-warm);
+  border-radius: 10px;
+  border-left: 3px solid var(--accent);
+}
+
+/* ===== ADD SECTION ===== */
+.add-section {
+  background: var(--bg-warm);
+  border: 2.5px solid var(--ink);
+  border-radius: 18px;
+  padding: 22px 24px;
+  box-shadow: 0 4px 0 var(--ink);
+  margin-bottom: 28px;
+}
+.add-header {
+  margin-bottom: 14px;
+}
+.add-title {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-weight: 700;
+  font-size: 17px;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+.add-title .badge {
+  display: inline-block;
+  background: var(--accent);
+  color: var(--bg);
+  padding: 2px 9px;
+  border-radius: 999px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.add-sub {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--ink-soft);
+  margin-top: 4px;
+}
+.add-textarea {
+  width: 100%;
+  min-height: 110px;
+  padding: 14px 16px;
+  font-family: 'Space Mono', 'Manrope', monospace;
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--ink);
+  background: var(--bg);
+  border: 2px solid var(--ink);
+  border-radius: 12px;
+  resize: vertical;
+  transition: box-shadow 0.15s, transform 0.15s;
+}
+.add-textarea:focus {
+  outline: none;
+  box-shadow: 0 3px 0 var(--ink);
+  transform: translateY(-1px);
+}
+.add-textarea::placeholder {
+  color: var(--ink-faint);
+  font-style: italic;
+}
+.add-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-top: 12px;
+  flex-wrap: wrap;
+}
+.btn-add {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--bg);
+  background: var(--ink);
+  padding: 10px 24px;
+  border: 2px solid var(--ink);
+  border-radius: 999px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 3px 0 var(--accent);
+  transition: all 0.15s;
+}
+.btn-add:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 0 var(--accent);
+}
+.btn-add:active {
+  transform: translateY(1px);
+  box-shadow: 0 1px 0 var(--accent);
+}
+.add-message {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--ink-faint);
+}
+.add-message.error {
+  color: #C73E1D;
+  font-weight: 600;
+}
+
+/* ===== TOAST ===== */
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 32px;
+  transform: translateX(-50%) translateY(120%);
+  background: var(--ink);
+  color: var(--bg);
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  padding: 12px 22px;
+  border-radius: 999px;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.18);
+  z-index: 999;
+  opacity: 0;
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.25s;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  pointer-events: none;
+}
+.toast.show {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+}
+.toast .toast-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px; height: 18px;
+  background: var(--accent);
+  color: var(--bg);
+  border-radius: 50%;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+/* ===== DOWNLOAD BUTTON ===== */
+.btn-download {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--ink);
+  background: var(--yellow);
+  padding: 7px 14px;
+  border: 2px solid var(--ink);
+  border-radius: 999px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.15s;
+}
+.btn-download:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 3px 0 var(--ink);
+}
+.btn-download:active {
+  transform: translateY(1px);
+}
+
+/* ===== DELETE BUTTON ===== */
+.btn-delete {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ink-soft);
+  background: transparent;
+  padding: 8px 14px;
+  border: 1.5px solid var(--border-strong);
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.btn-delete:hover {
+  color: #C73E1D;
+  border-color: #C73E1D;
+}
+
+/* ===== ENTRY ACTIONS (share, etc.) ===== */
+.entry-actions {
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1.5px dashed var(--border-strong);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-share {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ink);
+  background: var(--surface);
+  padding: 8px 16px;
+  border: 2px solid var(--ink);
+  border-radius: 999px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.15s;
+}
+.btn-share:hover {
+  background: var(--accent);
+  color: var(--bg);
+  transform: translateY(-1px);
+  box-shadow: 0 3px 0 var(--ink);
+}
+.btn-share:active {
+  transform: translateY(0);
+  box-shadow: 0 1px 0 var(--ink);
+}
+.btn-share svg { width: 13px; height: 13px; }
+
+/* ===== SPEAKER BUTTON ===== */
+.speak-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px; height: 30px;
+  padding: 0;
+  background: var(--surface);
+  border: 1.5px solid var(--ink);
+  border-radius: 50%;
+  color: var(--ink);
+  cursor: pointer;
+  transition: all 0.15s;
+  flex-shrink: 0;
+}
+.speak-btn:hover {
+  background: var(--accent);
+  color: var(--bg);
+  transform: scale(1.08);
+}
+.speak-btn.playing {
+  background: var(--accent);
+  color: var(--bg);
+  animation: pulse 1.2s infinite;
+}
+.speak-btn.small {
+  width: 22px; height: 22px;
+  border-width: 1.25px;
+}
+.speak-btn svg { width: 14px; height: 14px; }
+.speak-btn.small svg { width: 11px; height: 11px; }
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.12); }
+}
+
+/* ===== EMPTY STATE ===== */
+.empty-state {
+  text-align: center;
+  padding: 80px 20px;
+  background: var(--bg-warm);
+  border: 2px dashed var(--border-strong);
+  border-radius: 16px;
+}
+.empty-state .icon {
+  font-size: 56px;
+  color: var(--ink-faint);
+  margin-bottom: 16px;
+  line-height: 1;
+}
+.empty-state p {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--ink-soft);
+}
+.empty-state p.sub {
+  font-weight: 500;
+  font-size: 13px;
+  color: var(--ink-faint);
+  margin-top: 6px;
+}
+
+/* ===== FOOTER ===== */
+.footer-note {
+  margin-top: 56px;
+  padding-top: 24px;
+  border-top: 1.5px dashed var(--border-strong);
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: 12px;
+  color: var(--ink-faint);
+  text-align: center;
+}
+.footer-note a {
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 600;
+}
+.footer-note a:hover { text-decoration: underline; }
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 720px) {
+  .container { padding: 28px 18px 64px; }
+  .toolbar { grid-template-columns: 1fr; gap: 12px; }
+  .entry { padding: 22px 20px; }
+  .entry-header { flex-direction: column; align-items: flex-start; gap: 10px; }
+  .entry-meta { flex-direction: row; align-items: center; }
+  .stats-row { padding: 12px 16px; }
+  .export-group { gap: 6px; }
+  .btn-export { padding: 6px 10px; }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="brand-mark">
+      <span class="dot"></span>
+      My Tango Note
+    </div>
+    <div>
+      <div class="eyebrow">単語ノート · Bilingual Vocabulary</div>
+      <h1>My <span class="tango">Tango</span> Note</h1>
+      <div class="tagline">A quiet corner for words worth keeping.</div>
+    </div>
+  </header>
+
+  <!-- ADD SECTION -->
+  <section class="add-section">
+    <div class="add-header">
+      <h2 class="add-title">
+        <span class="badge">Add</span>
+        単語を追加
+      </h2>
+      <p class="add-sub">Claude(または ChatGPT・Gemini)に英単語を尋ねて、返ってきた JS オブジェクトを下に貼り付けてください。</p>
+    </div>
+    <textarea
+      class="add-textarea"
+      id="addTextarea"
+      placeholder='{
+  phrase: "deadline",
+  type: "noun",
+  meaningEN: "...",
+  meaningJP: "...",
+  ...
+}'
+      spellcheck="false"
+      autocomplete="off"></textarea>
+    <div class="add-actions">
+      <button class="btn-add" id="btnAdd">追加 →</button>
+      <span class="add-message" id="addMessage"></span>
+    </div>
+  </section>
+
+  <!-- TOOLBAR -->
+  <div class="toolbar">
+    <div class="search-wrap">
+      <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+      <input type="text" class="search-input" id="searchInput" placeholder="単語・意味・例文で検索...">
+    </div>
+    <div class="sort-wrap">
+      <select class="sort-select" id="sortSelect">
+        <option value="newest">Newest</option>
+        <option value="oldest">Oldest</option>
+        <option value="az">A → Z</option>
+        <option value="za">Z → A</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- FILTER CHIPS -->
+  <div class="filter-bar" id="typeFilters"></div>
+
+  <!-- STATS -->
+  <div class="stats-row">
+    <div class="count">
+      <strong id="visibleCount">0</strong>
+      <span>of <span id="totalCount">0</span> entries</span>
+    </div>
+    <div class="export-group">
+      <button class="btn-download" onclick="downloadCurrentHTML()">📥 ノートをダウンロード</button>
+      <button class="btn-export" onclick="exportCSV()">Export CSV</button>
+      <button class="btn-export" onclick="exportJSON()">Export JSON</button>
+    </div>
+  </div>
+
+  <!-- ENTRIES -->
+  <div class="entries" id="entries"></div>
+
+  <!-- FOOTER -->
+  <div class="footer-note">
+    Made with care + <a href="https://claude.ai" target="_blank">Claude</a> · <a href="https://mytangonote.com" target="_blank">mytangonote.com</a>
+  </div>
+
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast" role="status" aria-live="polite">
+  <span class="toast-icon">✓</span>
+  <span id="toastMessage">追加しました</span>
+</div>
+
+<script>
+// ===== ENTRIES (AIから返ってきたJSオブジェクトを、この配列に追加してください) =====
+// このマーカーは「ノートをダウンロード」機能で entries を正確に置き換えるために使われます。削除しないでください。
+// === ENTRIES_START ===
+const entries = [
+  // 例:
+  // {
+  //   phrase: 'eloquent',
+  //   type: 'adjective',
+  //   meaningEN: '...',
+  //   meaningJP: '...',
+  //   exampleEN: '...',
+  //   exampleJP: '...',
+  //   notes: '...',
+  //   dateAdded: '2026-05-18'
+  // },
+];
+// === ENTRIES_END ===
+
+const SPEAKER_SVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>';
+
+const SHARE_SVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>';
+
+let activeFilter = 'all';
+let searchQuery = '';
+let sortMode = 'newest';
+let currentSpeakBtn = null;
+const speechSupported = 'speechSynthesis' in window;
+
+if (speechSupported) {
+  window.speechSynthesis.onvoiceschanged = () => {};
+  window.speechSynthesis.getVoices();
+}
+
+function pickEnglishVoice() {
+  const voices = window.speechSynthesis.getVoices();
+  if (!voices.length) return null;
+  return voices.find(v => v.lang.startsWith('en') && /Google US English/i.test(v.name))
+      || voices.find(v => v.lang.startsWith('en-US') && /Natural/i.test(v.name))
+      || voices.find(v => v.lang.startsWith('en-US') && /Samantha|Alex|Karen|Daniel/i.test(v.name))
+      || voices.find(v => v.lang === 'en-US')
+      || voices.find(v => v.lang.startsWith('en'))
+      || null;
+}
+
+function speak(text, btn) {
+  if (!speechSupported) return;
+
+  if (currentSpeakBtn === btn && window.speechSynthesis.speaking) {
+    window.speechSynthesis.cancel();
+    btn.classList.remove('playing');
+    currentSpeakBtn = null;
+    return;
+  }
+
+  if (currentSpeakBtn) currentSpeakBtn.classList.remove('playing');
+  window.speechSynthesis.cancel();
+  currentSpeakBtn = null;
+
+  setTimeout(() => {
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = 'en-US';
+    utterance.rate = 1.0;
+    utterance.pitch = 1.0;
+
+    const voice = pickEnglishVoice();
+    if (voice) utterance.voice = voice;
+
+    utterance.onstart = () => {
+      currentSpeakBtn = btn;
+      btn.classList.add('playing');
+    };
+    utterance.onend = () => {
+      if (currentSpeakBtn === btn) {
+        btn.classList.remove('playing');
+        currentSpeakBtn = null;
+      }
+    };
+    utterance.onerror = () => {
+      btn.classList.remove('playing');
+      if (currentSpeakBtn === btn) currentSpeakBtn = null;
+    };
+
+    window.speechSynthesis.speak(utterance);
+  }, 80);
+}
+
+function speakerBtn(text, size = '') {
+  const cls = size ? `speak-btn ${size}` : 'speak-btn';
+  return `<button class="${cls}" data-speak="${escapeHTML(text)}" aria-label="Read aloud">${SPEAKER_SVG}</button>`;
+}
+
+function renderTypeFilters() {
+  const types = ['all', ...new Set(entries.map(e => e.type))];
+  const container = document.getElementById('typeFilters');
+  container.innerHTML = types.map(t =>
+    `<button class="filter-chip ${t === activeFilter ? 'active' : ''}" data-type="${escapeHTML(t)}">${escapeHTML(t)}</button>`
+  ).join('');
+  container.querySelectorAll('.filter-chip').forEach(btn => {
+    btn.addEventListener('click', () => {
+      activeFilter = btn.dataset.type;
+      renderTypeFilters();
+      renderEntries();
+    });
+  });
+}
+
+function getFiltered() {
+  let list = entries.slice();
+  if (activeFilter !== 'all') list = list.filter(e => e.type === activeFilter);
+  if (searchQuery) {
+    const q = searchQuery.toLowerCase();
+    list = list.filter(e =>
+      e.phrase.toLowerCase().includes(q) ||
+      e.meaningEN.toLowerCase().includes(q) ||
+      e.meaningJP.toLowerCase().includes(q) ||
+      e.exampleEN.toLowerCase().includes(q) ||
+      e.exampleJP.toLowerCase().includes(q) ||
+      (e.notes && e.notes.toLowerCase().includes(q))
+    );
+  }
+  switch (sortMode) {
+    case 'newest': list.sort((a, b) => b.dateAdded.localeCompare(a.dateAdded) || (parseInt(b.id) - parseInt(a.id))); break;
+    case 'oldest': list.sort((a, b) => a.dateAdded.localeCompare(b.dateAdded) || (parseInt(a.id) - parseInt(b.id))); break;
+    case 'az': list.sort((a, b) => a.phrase.toLowerCase().localeCompare(b.phrase.toLowerCase())); break;
+    case 'za': list.sort((a, b) => b.phrase.toLowerCase().localeCompare(a.phrase.toLowerCase())); break;
+  }
+  return list;
+}
+
+function formatDate(s) {
+  const d = new Date(s + 'T00:00:00');
+  return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+}
+
+function escapeHTML(s) {
+  if (!s) return '';
+  return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+}
+
+// AIから返ってきたエントリーに id が含まれていなくても自動で割り当てる
+function normalizeEntries() {
+  entries.forEach((e, idx) => {
+    if (!e.id) e.id = String(idx + 1);
+  });
+}
+
+// ===== localStorage 連携 =====
+const STORAGE_KEY = 'mytangonote_v1';
+
+function loadFromStorage() {
+  try {
+    const stored = localStorage.getItem(STORAGE_KEY);
+    if (!stored) return false;
+    const parsed = JSON.parse(stored);
+    if (!Array.isArray(parsed)) return false;
+    // 配列を空にして、保存済みのエントリーで埋め直す
+    entries.length = 0;
+    parsed.forEach(e => entries.push(e));
+    return true;
+  } catch (err) {
+    console.warn('localStorage の読み込みに失敗しました:', err);
+    return false;
+  }
+}
+
+function saveToStorage() {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(entries));
+  } catch (err) {
+    console.warn('localStorage への保存に失敗しました:', err);
+  }
+}
+
+// ===== エントリーの追加 =====
+function parseEntryObject(text) {
+  const trimmed = text.trim();
+  if (!trimmed) throw new Error('テキストが空です');
+
+  // 末尾のセミコロンやカンマを除去
+  let cleaned = trimmed.replace(/[;,]\s*$/, '');
+
+  // オブジェクトを取り出す: { から始まり } で終わる部分
+  const start = cleaned.indexOf('{');
+  const end = cleaned.lastIndexOf('}');
+  if (start === -1 || end === -1 || end <= start) {
+    throw new Error('JS オブジェクトの形式が見つかりません');
+  }
+  cleaned = cleaned.substring(start, end + 1);
+
+  // JS オブジェクトリテラルを評価 (Function constructor を使用、安全なスコープ)
+  let obj;
+  try {
+    obj = new Function('"use strict"; return (' + cleaned + ');')();
+  } catch (err) {
+    throw new Error('テキストを JS オブジェクトとして読み取れません: ' + err.message);
+  }
+
+  if (typeof obj !== 'object' || obj === null || Array.isArray(obj)) {
+    throw new Error('オブジェクトの形式ではありません');
+  }
+
+  // 必須フィールドをチェック
+  const required = ['phrase', 'type', 'meaningEN', 'meaningJP', 'exampleEN', 'exampleJP'];
+  const missing = required.filter(f => !obj[f] || typeof obj[f] !== 'string');
+  if (missing.length > 0) {
+    throw new Error('以下のフィールドが不足しています: ' + missing.join(', '));
+  }
+
+  // dateAdded が無ければ今日の日付を入れる
+  if (!obj.dateAdded) {
+    const d = new Date();
+    obj.dateAdded = d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+  }
+
+  return obj;
+}
+
+function addEntryFromText(text) {
+  const obj = parseEntryObject(text);
+  // 新しい id を割り当て
+  const maxId = entries.reduce((max, e) => Math.max(max, parseInt(e.id) || 0), 0);
+  obj.id = String(maxId + 1);
+  entries.push(obj);
+  saveToStorage();
+  return obj;
+}
+
+// ===== エントリーの削除 =====
+function deleteEntry(id) {
+  const idx = entries.findIndex(e => e.id === id);
+  if (idx === -1) return;
+  const phrase = entries[idx].phrase;
+  if (!confirm('「' + phrase + '」を削除しますか?')) return;
+  entries.splice(idx, 1);
+  saveToStorage();
+  renderTypeFilters();
+  renderEntries();
+  showToast('削除しました');
+}
+
+// ===== トースト通知 =====
+let toastTimer = null;
+function showToast(message) {
+  const toast = document.getElementById('toast');
+  const msgEl = document.getElementById('toastMessage');
+  msgEl.textContent = message;
+  toast.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => {
+    toast.classList.remove('show');
+  }, 2400);
+}
+
+// ===== 現在のノートを HTML としてダウンロード =====
+function downloadCurrentHTML() {
+  // 現在の HTML 全体を取得
+  const htmlSource = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
+
+  // entries を最新の内容で置き換え
+  const entriesJSON = JSON.stringify(entries, null, 2);
+  const newEntriesBlock =
+    '// === ENTRIES_START ===\nconst entries = ' + entriesJSON + ';\n// === ENTRIES_END ===';
+
+  const newHTML = htmlSource.replace(
+    /\/\/ === ENTRIES_START ===[\s\S]*?\/\/ === ENTRIES_END ===/,
+    newEntriesBlock
+  );
+
+  // ダウンロード
+  const blob = new Blob([newHTML], { type: 'text/html;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'my-tango-note.html';
+  a.click();
+  URL.revokeObjectURL(url);
+  showToast('ダウンロードしました');
+}
+
+function renderEntries() {
+  const list = getFiltered();
+  const container = document.getElementById('entries');
+  document.getElementById('totalCount').textContent = entries.length;
+  document.getElementById('visibleCount').textContent = list.length;
+
+  if (list.length === 0) {
+    const isEmptyNotebook = entries.length === 0;
+    if (isEmptyNotebook) {
+      container.innerHTML = '<div class="empty-state"><div class="icon">✒︎</div><p>あなたの単語ノートは、まだ空っぽです。</p><p class="sub">AIに気になる英単語を尋ねて、最初のエントリーを追加してみましょう。</p></div>';
+    } else {
+      container.innerHTML = '<div class="empty-state"><div class="icon">∅</div><p>該当する単語が見つかりません。</p></div>';
+    }
+    return;
+  }
+
+  container.innerHTML = list.map(e => `
+    <article class="entry">
+      <div class="entry-header">
+        <h2 class="entry-phrase">${escapeHTML(e.phrase)}${speakerBtn(e.phrase)}</h2>
+        <div class="entry-meta">
+          <span class="entry-type">${escapeHTML(e.type)}</span>
+          <span class="entry-date">${formatDate(e.dateAdded)}</span>
+        </div>
+      </div>
+      <div class="entry-section">
+        <div class="section-label">Meaning</div>
+        <div class="lang-row"><div class="lang-tag">EN</div><div class="lang-text">${escapeHTML(e.meaningEN)}</div></div>
+        <div class="lang-row"><div class="lang-tag">JP</div><div class="lang-text jp">${escapeHTML(e.meaningJP)}</div></div>
+      </div>
+      <div class="entry-section">
+        <div class="section-label">Example</div>
+        <div class="lang-row"><div class="lang-tag">EN</div><div class="lang-text example">${escapeHTML(e.exampleEN)}${speakerBtn(e.exampleEN, 'small')}</div></div>
+        <div class="lang-row"><div class="lang-tag">JP</div><div class="lang-text example jp">${escapeHTML(e.exampleJP)}</div></div>
+      </div>
+      ${e.notes ? `<div class="entry-section"><div class="section-label">Notes</div><div class="entry-notes">${escapeHTML(e.notes)}</div></div>` : ''}
+      <div class="entry-actions">
+        <button class="btn-delete" data-delete-id="${escapeHTML(e.id)}" aria-label="Delete entry">削除</button>
+        <button class="btn-share" data-share-id="${escapeHTML(e.id)}" aria-label="Share to X">
+          ${SHARE_SVG} X でシェア
+        </button>
+      </div>
+    </article>
+  `).join('');
+}
+
+function exportCSV() {
+  const headers = ['Phrase', 'Type', 'Meaning (EN)', 'Meaning (JP)', 'Example (EN)', 'Example (JP)', 'Notes', 'Date Added'];
+  const rows = entries.map(e => [e.phrase, e.type, e.meaningEN, e.meaningJP, e.exampleEN, e.exampleJP, e.notes || '', e.dateAdded]);
+  const cell = v => {
+    const s = String(v || '');
+    return /[,"\n]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s;
+  };
+  const csv = [headers, ...rows].map(r => r.map(cell).join(',')).join('\n');
+  download('\uFEFF' + csv, 'my-tango-note.csv', 'text/csv;charset=utf-8;');
+}
+
+function exportJSON() {
+  download(JSON.stringify(entries, null, 2), 'my-tango-note.json', 'application/json');
+}
+
+function shareEntry(id) {
+  const e = entries.find(ent => ent.id === id);
+  if (!e) return;
+
+  // First sentence of meaningJP, truncated if needed
+  let meaning = e.meaningJP.split(/[。\n]/)[0];
+  if (meaning.length > 60) meaning = meaning.substring(0, 57) + '...';
+
+  // exampleEN, truncated if needed
+  let example = e.exampleEN;
+  if (example.length > 100) example = example.substring(0, 97) + '...';
+
+  const text = `今日の単語: "${e.phrase}"
+"${example}"
+
+意味: ${meaning}
+
+#今日のMyTango
+https://mytangonote.com`;
+
+  const url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`;
+  window.open(url, '_blank', 'noopener,noreferrer');
+}
+
+function download(content, filename, type) {
+  const blob = new Blob([content], { type });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = filename;
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+document.getElementById('searchInput').addEventListener('input', e => {
+  searchQuery = e.target.value;
+  renderEntries();
+});
+document.getElementById('sortSelect').addEventListener('change', e => {
+  sortMode = e.target.value;
+  renderEntries();
+});
+
+document.getElementById('entries').addEventListener('click', e => {
+  const speakBtn = e.target.closest('.speak-btn');
+  if (speakBtn) {
+    speak(speakBtn.dataset.speak, speakBtn);
+    return;
+  }
+  const shareBtn = e.target.closest('.btn-share');
+  if (shareBtn) {
+    shareEntry(shareBtn.dataset.shareId);
+    return;
+  }
+  const deleteBtn = e.target.closest('.btn-delete');
+  if (deleteBtn) {
+    deleteEntry(deleteBtn.dataset.deleteId);
+    return;
+  }
+});
+
+// ===== 追加 UI =====
+const addTextarea = document.getElementById('addTextarea');
+const addMessage = document.getElementById('addMessage');
+const btnAdd = document.getElementById('btnAdd');
+
+function clearAddMessage() {
+  addMessage.textContent = '';
+  addMessage.classList.remove('error');
+}
+
+function setAddError(text) {
+  addMessage.textContent = text;
+  addMessage.classList.add('error');
+}
+
+btnAdd.addEventListener('click', () => {
+  clearAddMessage();
+  const text = addTextarea.value;
+  if (!text.trim()) {
+    setAddError('テキストを貼り付けてください');
+    return;
+  }
+  try {
+    const obj = addEntryFromText(text);
+    // 成功
+    addTextarea.value = '';
+    renderTypeFilters();
+    renderEntries();
+    showToast('「' + obj.phrase + '」を追加しました');
+  } catch (err) {
+    setAddError(err.message);
+  }
+});
+
+// テキストエリアにフォーカスが入ったらエラー表示をクリア
+addTextarea.addEventListener('focus', clearAddMessage);
+
+// Cmd/Ctrl + Enter で追加(キーボードショートカット)
+addTextarea.addEventListener('keydown', e => {
+  if ((e.metaKey || e.ctrlKey) && e.key === 'Enter') {
+    e.preventDefault();
+    btnAdd.click();
+  }
+});
+
+window.addEventListener('beforeunload', () => {
+  if (speechSupported) window.speechSynthesis.cancel();
+});
+
+// ===== 初期化 =====
+loadFromStorage();
+normalizeEntries();
+renderTypeFilters();
+renderEntries();
+</script>
+</body>
+</html>

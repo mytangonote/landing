@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Tango Note · 見本(Examples)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Manrope:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #FFFFFF;
+  --bg-warm: #FFFBF2;
+  --surface: #FFFFFF;
+  --ink: #1A1611;
+  --ink-soft: #5C5448;
+  --ink-faint: #9A8F7D;
+  --accent: #F26C2C;
+  --accent-deep: #D5571B;
+  --yellow: #FFD632;
+  --yellow-soft: #FFE873;
+  --pink: #FF9FB4;
+  --green: #5C8C5A;
+  --border: #EFE9DC;
+  --border-strong: #DCD0B5;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'Manrope', 'Noto Sans JP', system-ui, sans-serif;
+  font-size: 15px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+}
+
+.container {
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 40px 28px 96px;
+}
+
+/* ===== HEADER ===== */
+.header {
+  margin-bottom: 36px;
+  padding-bottom: 28px;
+  border-bottom: 2px solid var(--ink);
+}
+
+.brand-mark {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--ink);
+  letter-spacing: -0.005em;
+  margin-bottom: 20px;
+}
+.brand-mark .dot {
+  width: 10px; height: 10px;
+  background: var(--accent);
+  border-radius: 50%;
+}
+
+.eyebrow {
+  display: inline-block;
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  background: var(--yellow);
+  color: var(--ink);
+  padding: 5px 12px;
+  border-radius: 999px;
+  margin-bottom: 14px;
+}
+
+h1 {
+  font-family: 'Bricolage Grotesque', 'Noto Sans JP', sans-serif;
+  font-weight: 700;
+  font-size: clamp(36px, 5vw, 52px);
+  line-height: 0.98;
+  letter-spacing: -0.025em;
+  color: var(--ink);
+}
+h1 .tango {
+  font-style: italic;
+  color: var(--accent);
+  display: inline-block;
+  position: relative;
+}
+h1 .tango::after {
+  content: '';
+  position: absolute;
+  bottom: 0.08em; left: -2%;
+  width: 104%; height: 0.1em;
+  background: var(--yellow);
+  z-index: -1;
+  opacity: 0.85;
+}
+
+.tagline {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 16px;
+  color: var(--ink-soft);
+  margin-top: 10px;
+}
+
+/* ===== TOOLBAR ===== */
+.toolbar {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 16px;
+  margin-bottom: 24px;
+  align-items: center;
+}
+
+.search-wrap {
+  position: relative;
+}
+.search-input {
+  width: 100%;
+  padding: 14px 18px 14px 44px;
+  font-family: 'Manrope', 'Noto Sans JP', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--ink);
+  background: var(--surface);
+  border: 2px solid var(--ink);
+  border-radius: 999px;
+  box-shadow: 0 3px 0 var(--ink);
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+.search-input:focus {
+  outline: none;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 0 var(--ink);
+}
+.search-input::placeholder { color: var(--ink-faint); }
+.search-icon {
+  position: absolute;
+  left: 16px; top: 50%;
+  transform: translateY(-50%);
+  width: 18px; height: 18px;
+  color: var(--ink-soft);
+  pointer-events: none;
+}
+
+.sort-wrap { position: relative; }
+.sort-select {
+  appearance: none;
+  -webkit-appearance: none;
+  padding: 14px 40px 14px 18px;
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink);
+  background: var(--surface);
+  border: 2px solid var(--ink);
+  border-radius: 999px;
+  box-shadow: 0 3px 0 var(--ink);
+  cursor: pointer;
+  transition: transform 0.15s;
+}
+.sort-select:hover { transform: translateY(-1px); box-shadow: 0 4px 0 var(--ink); }
+.sort-select:focus { outline: none; }
+.sort-wrap::after {
+  content: '▾';
+  position: absolute;
+  right: 16px; top: 50%;
+  transform: translateY(-50%);
+  color: var(--ink);
+  font-size: 12px;
+  pointer-events: none;
+}
+
+/* ===== FILTER CHIPS ===== */
+.filter-bar {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 28px;
+  flex-wrap: wrap;
+}
+.filter-chip {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ink);
+  background: var(--surface);
+  padding: 8px 16px;
+  border: 2px solid var(--ink);
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all 0.15s;
+  text-transform: capitalize;
+}
+.filter-chip:hover {
+  background: var(--yellow);
+}
+.filter-chip.active {
+  background: var(--ink);
+  color: var(--bg);
+  box-shadow: 0 3px 0 var(--accent);
+  transform: translateY(-1px);
+}
+
+/* ===== STATS ===== */
+.stats-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 14px 20px;
+  background: var(--bg-warm);
+  border: 2px solid var(--ink);
+  border-radius: 14px;
+  box-shadow: 0 3px 0 var(--ink);
+  margin-bottom: 32px;
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-weight: 600;
+  font-size: 13px;
+}
+.stats-row .count {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.stats-row .count strong {
+  font-size: 18px;
+  color: var(--accent);
+}
+.export-group {
+  display: flex;
+  gap: 8px;
+}
+.btn-export {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ink);
+  background: var(--surface);
+  padding: 7px 14px;
+  border: 2px solid var(--ink);
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.btn-export:hover {
+  background: var(--ink);
+  color: var(--bg);
+}
+
+/* ===== ENTRIES ===== */
+.entries {
+  display: grid;
+  gap: 20px;
+}
+
+.entry {
+  background: var(--surface);
+  border: 2.5px solid var(--ink);
+  border-radius: 16px;
+  padding: 28px 30px;
+  box-shadow: 0 4px 0 var(--ink);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.entry:hover {
+  transform: translate(-1px, -2px);
+  box-shadow: 0 6px 0 var(--ink);
+}
+
+.entry-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 20px;
+  padding-bottom: 16px;
+  border-bottom: 1.5px dashed var(--border-strong);
+}
+
+.entry-phrase {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-weight: 700;
+  font-size: clamp(22px, 2.6vw, 28px);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.entry-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 6px;
+  flex-shrink: 0;
+}
+.entry-type {
+  display: inline-block;
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  color: var(--ink);
+  background: var(--yellow);
+  padding: 4px 11px;
+  border: 1.5px solid var(--ink);
+  border-radius: 999px;
+  text-transform: capitalize;
+  white-space: nowrap;
+}
+.entry-date {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  color: var(--ink-faint);
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.entry-section {
+  margin-bottom: 18px;
+}
+.entry-section:last-child { margin-bottom: 0; }
+
+.section-label {
+  display: inline-block;
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 8px;
+}
+
+.lang-row {
+  display: grid;
+  grid-template-columns: 28px 1fr;
+  gap: 12px;
+  margin-bottom: 6px;
+  align-items: start;
+}
+.lang-row:last-child { margin-bottom: 0; }
+
+.lang-tag {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--ink-faint);
+  letter-spacing: 0.05em;
+  padding-top: 4px;
+}
+
+.lang-text {
+  font-size: 14.5px;
+  line-height: 1.7;
+  color: var(--ink);
+}
+.lang-text.jp {
+  font-family: 'Noto Sans JP', sans-serif;
+}
+.lang-text.example {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-style: italic;
+  font-weight: 400;
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+.lang-text.example.jp {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-style: normal;
+}
+
+.entry-notes {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 13px;
+  line-height: 1.85;
+  color: var(--ink-soft);
+  padding: 14px 18px;
+  background: var(--bg-warm);
+  border-radius: 10px;
+  border-left: 3px solid var(--accent);
+}
+
+/* ===== ENTRY ACTIONS (share, etc.) ===== */
+.entry-actions {
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1.5px dashed var(--border-strong);
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.btn-share {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ink);
+  background: var(--surface);
+  padding: 8px 16px;
+  border: 2px solid var(--ink);
+  border-radius: 999px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.15s;
+}
+.btn-share:hover {
+  background: var(--accent);
+  color: var(--bg);
+  transform: translateY(-1px);
+  box-shadow: 0 3px 0 var(--ink);
+}
+.btn-share:active {
+  transform: translateY(0);
+  box-shadow: 0 1px 0 var(--ink);
+}
+.btn-share svg { width: 13px; height: 13px; }
+
+/* ===== SPEAKER BUTTON ===== */
+.speak-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px; height: 30px;
+  padding: 0;
+  background: var(--surface);
+  border: 1.5px solid var(--ink);
+  border-radius: 50%;
+  color: var(--ink);
+  cursor: pointer;
+  transition: all 0.15s;
+  flex-shrink: 0;
+}
+.speak-btn:hover {
+  background: var(--accent);
+  color: var(--bg);
+  transform: scale(1.08);
+}
+.speak-btn.playing {
+  background: var(--accent);
+  color: var(--bg);
+  animation: pulse 1.2s infinite;
+}
+.speak-btn.small {
+  width: 22px; height: 22px;
+  border-width: 1.25px;
+}
+.speak-btn svg { width: 14px; height: 14px; }
+.speak-btn.small svg { width: 11px; height: 11px; }
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.12); }
+}
+
+/* ===== EMPTY STATE ===== */
+.empty-state {
+  text-align: center;
+  padding: 80px 20px;
+  background: var(--bg-warm);
+  border: 2px dashed var(--border-strong);
+  border-radius: 16px;
+}
+.empty-state .icon {
+  font-size: 56px;
+  color: var(--ink-faint);
+  margin-bottom: 16px;
+  line-height: 1;
+}
+.empty-state p {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--ink-soft);
+}
+
+/* ===== FOOTER ===== */
+.footer-note {
+  margin-top: 56px;
+  padding-top: 24px;
+  border-top: 1.5px dashed var(--border-strong);
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: 12px;
+  color: var(--ink-faint);
+  text-align: center;
+}
+.footer-note a {
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 600;
+}
+.footer-note a:hover { text-decoration: underline; }
+
+/* ===== EXAMPLE BANNER ===== */
+.example-banner {
+  background: var(--yellow);
+  color: var(--ink);
+  padding: 14px 20px;
+  border-radius: 12px;
+  border: 2px solid var(--ink);
+  box-shadow: 0 3px 0 var(--ink);
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: 13px;
+  margin-bottom: 28px;
+  line-height: 1.6;
+}
+.example-banner strong {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 14px;
+  font-weight: 700;
+}
+.example-banner code {
+  font-family: 'Space Mono', monospace;
+  font-size: 12px;
+  background: rgba(0, 0, 0, 0.08);
+  padding: 1px 6px;
+  border-radius: 4px;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 720px) {
+  .container { padding: 28px 18px 64px; }
+  .toolbar { grid-template-columns: 1fr; gap: 12px; }
+  .entry { padding: 22px 20px; }
+  .entry-header { flex-direction: column; align-items: flex-start; gap: 10px; }
+  .entry-meta { flex-direction: row; align-items: center; }
+  .stats-row { padding: 12px 16px; }
+  .export-group { gap: 6px; }
+  .btn-export { padding: 6px 10px; }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="brand-mark">
+      <span class="dot"></span>
+      My Tango Note
+    </div>
+    <div>
+      <div class="eyebrow">単語ノート · Bilingual Vocabulary</div>
+      <h1>My <span class="tango">Tango</span> Note</h1>
+      <div class="tagline">A quiet corner for words worth keeping.</div>
+    </div>
+  </header>
+
+  <!-- EXAMPLE BANNER -->
+  <div class="example-banner">
+    <strong>📖 これは「見本」です</strong>
+    14個のサンプルエントリーが入っています。あなたの空の単語ノートは <code>index.html</code> です。
+  </div>
+
+  <!-- TOOLBAR -->
+  <div class="toolbar">
+    <div class="search-wrap">
+      <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+      <input type="text" class="search-input" id="searchInput" placeholder="単語・意味・例文で検索...">
+    </div>
+    <div class="sort-wrap">
+      <select class="sort-select" id="sortSelect">
+        <option value="newest">Newest</option>
+        <option value="oldest">Oldest</option>
+        <option value="az">A → Z</option>
+        <option value="za">Z → A</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- FILTER CHIPS -->
+  <div class="filter-bar" id="typeFilters"></div>
+
+  <!-- STATS -->
+  <div class="stats-row">
+    <div class="count">
+      <strong id="visibleCount">0</strong>
+      <span>of <span id="totalCount">0</span> entries</span>
+    </div>
+    <div class="export-group">
+      <button class="btn-export" onclick="exportCSV()">Export CSV</button>
+      <button class="btn-export" onclick="exportJSON()">Export JSON</button>
+    </div>
+  </div>
+
+  <!-- ENTRIES -->
+  <div class="entries" id="entries"></div>
+
+  <!-- FOOTER -->
+  <div class="footer-note">
+    Made with care + <a href="https://claude.ai" target="_blank">Claude</a> · <a href="https://mytangonote.com" target="_blank">mytangonote.com</a>
+  </div>
+
+</div>
+
+<script>
+// ===== ENTRIES (Claude updates this list each time Mark adds a new word) =====
+const entries = [
+  {
+    id: '1',
+    phrase: 'take something with a grain of salt',
+    type: 'idiom',
+    meaningEN: 'To not completely believe something; to view a claim with healthy skepticism.',
+    meaningJP: '話を鵜呑みにせず、ある程度割り引いて聞くこと。「話半分に聞く」。',
+    exampleEN: "His revenue projections are interesting, but I'd take them with a grain of salt — he's pitched the same numbers for three quarters now.",
+    exampleJP: '彼の売上予測は興味深いけど、話半分で聞いておいた方がいい。3四半期連続で同じ数字を出してきてるから。',
+    notes: 'カジュアル〜ビジネスどちらでも使える。イギリス英語では "a pinch of salt" も同義。',
+    dateAdded: '2026-05-13'
+  },
+  {
+    id: '2',
+    phrase: 'Could you share something unexpected or a fun fact about you?',
+    type: 'phrase',
+    meaningEN: 'A polite, friendly request used in introductions, interviews, or team icebreakers to invite someone to share a surprising or interesting personal detail.',
+    meaningJP: '自己紹介・面接・チームのアイスブレイクなどで使われる、相手の意外な一面や面白い豆知識を引き出す丁寧な質問。',
+    exampleEN: 'Before we wrap up, could you share something unexpected or a fun fact about you?',
+    exampleJP: '締めくくる前に、何か意外なことや、ご自身についての面白いエピソードがあれば教えていただけますか？',
+    notes: '"a fun fact about you" は定番のアイスブレイク表現。"Could you share..." は "Tell me..." より丁寧で、ビジネスでもカジュアルでも使える万能フレーズ。',
+    dateAdded: '2026-05-13'
+  },
+  {
+    id: '3',
+    phrase: 'transparency',
+    type: 'noun',
+    meaningEN: 'The quality of being open, honest, and accountable — sharing information freely so intentions, decisions, and processes can be clearly seen. Also (literal): the property of allowing light to pass through.',
+    meaningJP: '情報や意思決定のプロセスを隠さず開示する性質＝「透明性」。組織運営や政治の文脈では「説明責任を伴う開示」というニュアンス。物理的には「光を通す性質」も。',
+    exampleEN: 'The new leadership has prioritized transparency — they share weekly updates on company performance, including the hard numbers.',
+    exampleJP: '新しい経営陣は透明性を最優先にしている。業績の厳しい数字も含めて、週次で全社に共有している。',
+    notes: 'ビジネス文脈で頻出。コロケーション: financial transparency / transparent leadership / radical transparency。類義語: openness（より日常的）, accountability（説明責任のニュアンス強）。反対語: opaque（不透明な）, opacity。形容詞は transparent。',
+    dateAdded: '2026-05-13'
+  },
+  {
+    id: '4',
+    phrase: 'acknowledge',
+    type: 'verb',
+    meaningEN: '1) To recognize or accept that something exists or is true. 2) To express thanks, appreciation, or recognition for someone\'s contribution. 3) To confirm receipt of something (a message, document, etc.).',
+    meaningJP: '①（事実・存在・問題などを）認める、認識する ②（努力・貢献などに対して）感謝や評価を表す、ねぎらう ③（受領を）確認する、了解の意を示す',
+    exampleEN: "I want to acknowledge the team's hard work on the launch — your dedication didn't go unnoticed.",
+    exampleJP: '今回のローンチに向けたチームのがんばりに、ちゃんと感謝を伝えたい。皆さんの献身は見過ごされていません。',
+    notes: 'リーダー・マネジメント文脈の必須語彙。「ちゃんと見ているよ」を伝えるニュアンス。コロケーション: acknowledge the effort / acknowledge the challenge / acknowledge receipt of（受領確認、フォーマル）。発音は "ack-NAH-lij"、c は黙字。admit との違い: admit は「しぶしぶ認める」ニュアンス、acknowledge はニュートラル〜前向き。名詞形は acknowledgment (米) / acknowledgement (英)。',
+    dateAdded: '2026-05-13'
+  },
+  {
+    id: '5',
+    phrase: 'accommodation',
+    type: 'noun',
+    meaningEN: '1) A place to stay or live; lodging. 2) An adjustment or arrangement made to meet someone\'s needs (especially in the workplace, education, or for people with disabilities). 3) The act of reconciling differences; a compromise.',
+    meaningJP: '①宿泊施設・住まい・滞在場所 ②（職場・教育・障害対応などにおける）合理的な配慮、調整、便宜 ③利害や意見のすり合わせ、妥協',
+    exampleEN: 'We need to provide reasonable accommodations for employees with caregiving responsibilities — flexible hours, remote work, that kind of thing.',
+    exampleJP: '介護中の社員には、合理的配慮（フレックス勤務やリモートワークなど）をきちんと用意する必要がある。',
+    notes: 'HR/D&I の必須語彙。"reasonable accommodation"（合理的配慮）は法律用語にもなっている重要表現。動詞は accommodate /əˈkɑːmədeɪt/「収容する」「便宜を図る」。スペル注意: c が2つ、m が2つ — 学習者がよく間違える。米英で意味の重心が違う: 英 = 宿泊の意味が強い / 米 = 配慮・調整も対等。コロケーション: reasonable accommodation / make accommodations for / book accommodation（宿泊予約）。発音は "a-KOM-uh-DAY-shun"、強勢は DAY。',
+    dateAdded: '2026-05-13'
+  },
+  {
+    id: '6',
+    phrase: 'sorting out',
+    type: 'phrasal verb',
+    meaningEN: '1) Organizing or arranging things into proper order. 2) Resolving, handling, or dealing with a problem or situation. 3) Figuring out or making sense of something confusing.',
+    meaningJP: '①整理する、分類する ②（問題・状況を）解決する、片付ける、対処する ③（混乱を）整理して理解する、すっきりさせる',
+    exampleEN: "Don't worry about the paperwork — HR is sorting it out.",
+    exampleJP: '書類のことは心配しないで。HRが対応しているから。',
+    notes: '動詞の基本形は "sort out"。-ing 形は会話で超頻出。イギリス英語で特に多用されるが米英共通で使える万能表現。自動詞・他動詞どちらでも使える: sort out the issue / Things will sort themselves out（自然と解決するだろう）。カジュアル〜セミフォーマル、Slackやミーティングで毎日使うレベル。類似: figure out（理解する）/ work out（工夫して解決）/ deal with（対処、フォーマル寄り）/ handle（扱う）。便利な定型: "I\'ll sort it out."（私が対応するよ）/ "We\'re still sorting things out."（まだ調整中）',
+    dateAdded: '2026-05-13'
+  },
+  {
+    id: '7',
+    phrase: 'conflict',
+    type: 'noun · verb',
+    meaningEN: '1) (noun) A serious disagreement, dispute, or clash — between people, teams, ideas, or interests. 2) (noun) An incompatibility — between schedules, priorities, or commitments. 3) (verb) To be in opposition with; to clash.',
+    meaningJP: '①（名）意見・利害・人同士の対立、衝突 ②（名）スケジュールや優先順位のバッティング、両立しない状態 ③（動）対立する、矛盾する、両立しない',
+    exampleEN: 'We need to address the conflict between the engineering and sales teams before it escalates — their priorities have been pulling in different directions for weeks.',
+    exampleJP: 'エンジニアリングチームと営業チームの対立は、エスカレートする前に正面から向き合う必要がある。優先順位が何週間も別方向を向いてしまっている。',
+    notes: '【Business mode】発音注意: 名詞は CONflict (前アクセント)、動詞は conFLICT (後アクセント) — 英語特有のストレスシフトの典型例。ビジネス必須コロケーション: conflict of interest（利益相反、法務・コンプラ超重要）/ scheduling conflict（予定のバッティング）/ conflict resolution（対立の解決、HR・マネジメント文脈）/ conflicting priorities（競合する優先順位）。ニュアンス: argument より深刻、構造的・継続的な対立を示唆。一過性の口論は argument、瞬間的なぶつかり合いは clash。形容詞: conflicting（矛盾する、対立する）/ conflicted（板挟みになっている、内心揺れている）。類似語: tension（表面化前の緊張）/ friction（継続的な摩擦）/ dispute（より公式・法的）。',
+    dateAdded: '2026-05-13'
+  },
+  {
+    id: '8',
+    phrase: 'cohort',
+    type: 'noun',
+    meaningEN: '1) A group of people sharing a particular trait or experience, especially analyzed together (a generation, a class, a hiring batch, a research group). 2) (older / literary) A companion, supporter, or accomplice. 3) (history) A unit of Roman infantry, roughly one-tenth of a legion.',
+    meaningJP: '①共通の特徴や経験を持つ集団。同期、世代、対象群、研究の母集団など、まとめて分析される単位 ②（古い/文学的）仲間、同志、相棒 ③（古代ローマの）歩兵部隊。1レギオンの 1/10',
+    exampleEN: "Our 2024 cohort of new hires has consistently outperformed last year's group on early performance metrics — we're trying to understand what made the difference.",
+    exampleJP: '2024年入社のコホート（同期）は、初期のパフォーマンス指標で前年同期を一貫して上回っている。何が違いを生んだのか、いま分析中だ。',
+    notes: '発音: KO-hort（前アクセント）。h はちゃんと読む(黙字じゃない)。現代英語の圧倒的多数派は①の「分析対象集団」 — HRなら同期入社、医学なら追跡対象、教育なら学年、プロダクト分析なら登録月別ユーザー。cohort analysis(コホート分析)は HR / マーケ / プロダクトの超基本手法: 同じ時期に start した集団を時系列で追う。語源はローマ軍の歩兵部隊。group との違い: group は単なる集まり、cohort は「同じ条件で start した集団」という分析的ニュアンス。類義: batch(カジュアル、新人グループに) / generation / class(学校・学年)。②「仲間」の意味は文脈次第でややネガティブ: "He and his cohorts were arrested."',
+    dateAdded: '2026-05-13'
+  },
+  {
+    id: '9',
+    phrase: 'transformative',
+    type: 'adjective',
+    meaningEN: '1) Causing a significant change in form, nature, or character; having the power to transform. 2) Profoundly impactful — used for experiences, technologies, leadership, or events that fundamentally alter how things are done or perceived.',
+    meaningJP: '①（根本的に）変容させる、変革をもたらす、性質や姿を変える力を持つ ②深く本質的な変化を引き起こすような（経験・技術・リーダーシップ・出来事などを形容）',
+    exampleEN: 'The adoption of generative AI has been transformative for our team — not just a productivity boost, but a fundamental shift in how we approach problem-solving.',
+    exampleJP: '生成AIの導入は、私たちのチームにとって transformative（変革的）だった。単なる生産性向上ではなく、問題解決のアプローチそのものを根本から変えた。',
+    notes: '発音: trans-FOR-ma-tive(強勢は FOR)。ポジティブな響きが基本、日常会話よりはビジネス・教育・経営文脈で多用。transformational との違い: transformative = 変化を起こす力を持つ(効果・結果寄り) / transformational = 変化のプロセス・役割に関する("transformational leadership" は学術用語として定着)。実用上はかなり重なる。強いコロケーション: transformative experience(人生を変える経験) / transformative technology / transformative leadership / transformative change / transformative impact。要注意: マーケティング・スピーチで使われすぎて "bullshit word" 認定されることも。本当に変革的なときに取っておくと信頼が増す。強める副詞: deeply / truly / genuinely + transformative。動詞: transform / 名詞: transformation。',
+    dateAdded: '2026-05-13'
+  },
+  {
+    id: '10',
+    phrase: 'alter',
+    type: 'verb',
+    meaningEN: '1) To change or cause to change in character, appearance, structure, or composition. 2) (formal) To modify or adjust something — often partially rather than completely. 3) (American English) To neuter or spay an animal.',
+    meaningJP: '①変える、変更する、改変する（性質・外見・構造・構成を）②（フォーマル）部分的に修正・調整する ③（米、動物に対して）去勢する／避妊手術をする',
+    exampleEN: 'We had to alter the project timeline when the client moved the deadline forward by two weeks.',
+    exampleJP: 'クライアントが締切を2週間前倒ししたため、プロジェクトのスケジュールを変更せざるを得なかった。',
+    notes: '発音: 英 /ˈɔːltər/、米 /ˈɑːltər/。第1音節にアクセント。change との違い: alter は部分的・修正的な変更（全体は残る）/ change は全体的・置き換えも含む広い変化。modify との違い: ほぼ同義だが、modify はテクニカル・フォーマル文脈寄り、alter はやや文学的・落ち着いた響き。transform との違い: transform はもっと劇的・本質的な変化。名詞形: alteration（変更、修正、服のお直し）。形容詞: alterable / unalterable。慣用: altered state of consciousness（変性意識状態）/ alter ego（もう一人の自分）。同綴別意味注意: altar（祭壇）と発音同じ、意味は全く違う — よく混同される。',
+    dateAdded: '2026-05-13'
+  },
+  {
+    id: '11',
+    phrase: 'come to think of it',
+    type: 'idiom',
+    meaningEN: "A conversational expression used when something suddenly occurs to the speaker mid-thought — \"now that I'm thinking about it\" or \"now that you mention it.\" Used to introduce a related thought, realization, or reconsideration.",
+    meaningJP: '会話中にふと何かを思い出した・気づいたときに使う前置き表現。「そういえば」「考えてみたら」「言われてみれば」のニュアンス。話の途中で関連する思考や気づき、見直しを差し込むときに使う。',
+    exampleEN: "Come to think of it, I haven't heard back from her since the meeting last week — I should follow up.",
+    exampleJP: 'そういえば、先週のミーティング以来、彼女から返事がないな。ちょっと連絡してみよう。',
+    notes: '文頭で使うのが圧倒的に多い。文中・文末でもOK: "I haven\'t seen him in a while, come to think of it."。カジュアル〜セミフォーマル、日常会話・メール・Slack で頻出。プレゼンや論文では使わない。ニュアンスの違い: come to think of it = ふと気づいた・思い出した（自分の気づき）/ now that you mention it = 言われてみれば（相手の発言を受けて）/ on second thought = やっぱり、考え直したら（意見の変更）/ by the way = ところで（話題の切り替え、関連性は薄い）/ speaking of which = そういえばその話で（直前の話題から派生）。"Come to think of it..." の前に軽く間を置くと自然。似た日本語感覚: 「あ、そういえば」「考えてみると」「言われてみれば確かに」。',
+    dateAdded: '2026-05-13'
+  },
+  {
+    id: '12',
+    phrase: 'as fatalities mount',
+    type: 'phrase',
+    meaningEN: 'A journalistic construction used when reporting on disasters, conflicts, accidents, or crises, meaning "as the number of deaths continues to rise." Often appears in news leads or headlines to convey escalating severity over time.',
+    meaningJP: 'ジャーナリズム特有の定型表現で、「死者数が増え続ける中で」「犠牲者が増えるにつれて」という意味。災害・紛争・事故・危機を報じる記事のリード文や見出しで、深刻さが時間とともに増大している様を伝えるために使われる。',
+    exampleEN: 'As fatalities mount in the wake of the typhoon, the government has declared a state of emergency in three prefectures.',
+    exampleJP: '台風の余波で死者数が増え続ける中、政府は3つの県に非常事態を宣言した。',
+    notes: '【News mode】as = 「〜するにつれて」「〜する中で」を表す接続詞、同時進行を示す。mount (自動詞) = 増える、高まる、積み上がる — 死傷者・損害・批判・圧力など不快/深刻なものが増える文脈で多用: Pressure mounts on the PM / Criticism mounted / Damage mounts。fatalities = 死者・犠牲者、deaths よりも公式・客観的・統計的な響き、政府発表や報道で多用。単数は fatality（1件の死亡事例）。似た News 定型: as the death toll rises（ほぼ同義の標準）/ as casualties grow（casualties は死傷者全般、fatality より広い）/ amid mounting concerns（高まる懸念の中で）/ with no end in sight（収束の兆しが見えない）。重い話題に使う構文、日常会話ではまず使わない。読むときに即理解できるようにしておく語彙。',
+    dateAdded: '2026-05-14'
+  },
+  {
+    id: '13',
+    phrase: 'penchant for',
+    type: 'phrase',
+    meaningEN: "A strong inclination, taste, or liking for something or for doing something. Usually implies a habitual or characteristic preference, often pointing to a refined or distinctive aspect of someone's personality.",
+    meaningJP: '何かに対する強い嗜好・好み・傾向。「〜が好きで習慣的にやっている」「〜への独特の偏愛」というニュアンス。その人の個性や特徴を描写するときに使われる、やや洗練された表現。',
+    exampleEN: "The new CEO is known for her penchant for direct, unvarnished communication — a refreshing change from her predecessor's diplomatic style.",
+    exampleJP: '新しいCEOは、率直で飾らないコミュニケーションを好むことで知られている。前任者の外交的なスタイルとは対照的な、新鮮な変化だ。',
+    notes: '発音: 米 /ˈpɛn.tʃənt/(PEN-chunt)が一般的。フランス語由来なので /ˈpɑ̃ʃɑ̃/(パン・シャン)と発音する人もいる。語源: フランス語 pencher(傾く、傾斜する)から、「心が傾く」イメージ。必ず "for" とセットで使う: penchant for + 名詞/動名詞。定型: have a penchant for X / show a penchant for X / known for one\'s penchant for X。やや文学的・洗練された響き、人物プロフィール・特集記事・伝記・書評でよく使われる。ビジネスでも誰かの癖や特徴を描写すると知的な印象。類義語: liking(一般的、カジュアル) / preference(比較して選ぶ) / fondness(愛着のある温かい好み) / predilection(ほぼ同義、よりフォーマル) / inclination(傾向、中立的) / proclivity(傾向、ややネガティブに使われがち) / weakness for(好きすぎてやめられない感、a weakness for chocolate)。含意: 軽くポジティブ〜中立、やや贅沢・凝った趣味のニュアンスを伴うことも: a penchant for fine wines / vintage typewriters。',
+    dateAdded: '2026-05-14'
+  },
+  {
+    id: '14',
+    phrase: 'Please take the time you need',
+    type: 'phrase',
+    meaningEN: 'A courteous expression used to grant someone space, patience, or autonomy to proceed at their own pace. It conveys "no rush," "I\'m not pressuring you," and "I trust your judgment about timing." Common in supportive professional contexts — when delegating, responding to apologies for delays, or acknowledging that someone needs space to deliberate.',
+    meaningJP: '相手に「焦らないで」「自分のペースで進めていい」と伝える丁寧な表現。プレッシャーをかけず、相手の裁量とタイミングを尊重するニュアンス。ビジネスでは仕事を任せるとき、相手が「遅れてすみません」と詫びたとき、または熟考の余地を与えたいときに使う。「ゆっくりで大丈夫です」「お時間のあるときに」に近い。',
+    exampleEN: 'I know this decision has significant implications for your team — please take the time you need to discuss it internally before getting back to me.',
+    exampleJP: 'この判断はあなたのチームにとって大きな意味を持つと思います。社内でじっくり話し合っていただいた上で、改めて返答いただければ大丈夫です。',
+    notes: '【Business mode】発音: please take the TIME you NEED(time と need にストレス)。マネジメントやクライアント対応で「成熟したリーダー感」を出す定番フレーズ、急かさない姿勢が信頼を生む。類似ビジネス定型: "Please take your time."(ほぼ同義、もう少しカジュアル) / "No rush."(カジュアル寄り、Slack で多用) / "Whenever works for you."(スケジュール調整時) / "At your convenience."(よりフォーマル、メール末尾向き) / "There\'s no pressure."(もう一段強く伝える)。使い場面: 部下が遅れを詫びたとき / 重要な意思決定の依頼時 / クライアントの返信遅れに対する返答。落とし穴: 多用すると「本当は急いでほしいのに気を遣ってる」と見透かされる、本当に急ぎなら "We\'d appreciate a response by [date], but please reach out if you need more time." のように具体的に。日本人話者にとっての安心感: 「お時間のあるときに」「無理のない範囲で」と同じ柔らかさを英語で表現できる。',
+    dateAdded: '2026-05-14'
+  }
+];
+
+const SPEAKER_SVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>';
+
+const SHARE_SVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>';
+
+let activeFilter = 'all';
+let searchQuery = '';
+let sortMode = 'newest';
+let currentSpeakBtn = null;
+const speechSupported = 'speechSynthesis' in window;
+
+if (speechSupported) {
+  window.speechSynthesis.onvoiceschanged = () => {};
+  window.speechSynthesis.getVoices();
+}
+
+function pickEnglishVoice() {
+  const voices = window.speechSynthesis.getVoices();
+  if (!voices.length) return null;
+  return voices.find(v => v.lang.startsWith('en') && /Google US English/i.test(v.name))
+      || voices.find(v => v.lang.startsWith('en-US') && /Natural/i.test(v.name))
+      || voices.find(v => v.lang.startsWith('en-US') && /Samantha|Alex|Karen|Daniel/i.test(v.name))
+      || voices.find(v => v.lang === 'en-US')
+      || voices.find(v => v.lang.startsWith('en'))
+      || null;
+}
+
+function speak(text, btn) {
+  if (!speechSupported) return;
+
+  if (currentSpeakBtn === btn && window.speechSynthesis.speaking) {
+    window.speechSynthesis.cancel();
+    btn.classList.remove('playing');
+    currentSpeakBtn = null;
+    return;
+  }
+
+  if (currentSpeakBtn) currentSpeakBtn.classList.remove('playing');
+  window.speechSynthesis.cancel();
+  currentSpeakBtn = null;
+
+  setTimeout(() => {
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = 'en-US';
+    utterance.rate = 1.0;
+    utterance.pitch = 1.0;
+
+    const voice = pickEnglishVoice();
+    if (voice) utterance.voice = voice;
+
+    utterance.onstart = () => {
+      currentSpeakBtn = btn;
+      btn.classList.add('playing');
+    };
+    utterance.onend = () => {
+      if (currentSpeakBtn === btn) {
+        btn.classList.remove('playing');
+        currentSpeakBtn = null;
+      }
+    };
+    utterance.onerror = () => {
+      btn.classList.remove('playing');
+      if (currentSpeakBtn === btn) currentSpeakBtn = null;
+    };
+
+    window.speechSynthesis.speak(utterance);
+  }, 80);
+}
+
+function speakerBtn(text, size = '') {
+  const cls = size ? `speak-btn ${size}` : 'speak-btn';
+  return `<button class="${cls}" data-speak="${escapeHTML(text)}" aria-label="Read aloud">${SPEAKER_SVG}</button>`;
+}
+
+function renderTypeFilters() {
+  const types = ['all', ...new Set(entries.map(e => e.type))];
+  const container = document.getElementById('typeFilters');
+  container.innerHTML = types.map(t =>
+    `<button class="filter-chip ${t === activeFilter ? 'active' : ''}" data-type="${escapeHTML(t)}">${escapeHTML(t)}</button>`
+  ).join('');
+  container.querySelectorAll('.filter-chip').forEach(btn => {
+    btn.addEventListener('click', () => {
+      activeFilter = btn.dataset.type;
+      renderTypeFilters();
+      renderEntries();
+    });
+  });
+}
+
+function getFiltered() {
+  let list = entries.slice();
+  if (activeFilter !== 'all') list = list.filter(e => e.type === activeFilter);
+  if (searchQuery) {
+    const q = searchQuery.toLowerCase();
+    list = list.filter(e =>
+      e.phrase.toLowerCase().includes(q) ||
+      e.meaningEN.toLowerCase().includes(q) ||
+      e.meaningJP.toLowerCase().includes(q) ||
+      e.exampleEN.toLowerCase().includes(q) ||
+      e.exampleJP.toLowerCase().includes(q) ||
+      (e.notes && e.notes.toLowerCase().includes(q))
+    );
+  }
+  switch (sortMode) {
+    case 'newest': list.sort((a, b) => b.dateAdded.localeCompare(a.dateAdded) || (parseInt(b.id) - parseInt(a.id))); break;
+    case 'oldest': list.sort((a, b) => a.dateAdded.localeCompare(b.dateAdded) || (parseInt(a.id) - parseInt(b.id))); break;
+    case 'az': list.sort((a, b) => a.phrase.toLowerCase().localeCompare(b.phrase.toLowerCase())); break;
+    case 'za': list.sort((a, b) => b.phrase.toLowerCase().localeCompare(a.phrase.toLowerCase())); break;
+  }
+  return list;
+}
+
+function formatDate(s) {
+  const d = new Date(s + 'T00:00:00');
+  return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+}
+
+function escapeHTML(s) {
+  if (!s) return '';
+  return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+}
+
+function renderEntries() {
+  const list = getFiltered();
+  const container = document.getElementById('entries');
+  document.getElementById('totalCount').textContent = entries.length;
+  document.getElementById('visibleCount').textContent = list.length;
+
+  if (list.length === 0) {
+    container.innerHTML = '<div class="empty-state"><div class="icon">∅</div><p>該当する単語が見つかりません。</p></div>';
+    return;
+  }
+
+  container.innerHTML = list.map(e => `
+    <article class="entry">
+      <div class="entry-header">
+        <h2 class="entry-phrase">${escapeHTML(e.phrase)}${speakerBtn(e.phrase)}</h2>
+        <div class="entry-meta">
+          <span class="entry-type">${escapeHTML(e.type)}</span>
+          <span class="entry-date">${formatDate(e.dateAdded)}</span>
+        </div>
+      </div>
+      <div class="entry-section">
+        <div class="section-label">Meaning</div>
+        <div class="lang-row"><div class="lang-tag">EN</div><div class="lang-text">${escapeHTML(e.meaningEN)}</div></div>
+        <div class="lang-row"><div class="lang-tag">JP</div><div class="lang-text jp">${escapeHTML(e.meaningJP)}</div></div>
+      </div>
+      <div class="entry-section">
+        <div class="section-label">Example</div>
+        <div class="lang-row"><div class="lang-tag">EN</div><div class="lang-text example">${escapeHTML(e.exampleEN)}${speakerBtn(e.exampleEN, 'small')}</div></div>
+        <div class="lang-row"><div class="lang-tag">JP</div><div class="lang-text example jp">${escapeHTML(e.exampleJP)}</div></div>
+      </div>
+      ${e.notes ? `<div class="entry-section"><div class="section-label">Notes</div><div class="entry-notes">${escapeHTML(e.notes)}</div></div>` : ''}
+      <div class="entry-actions">
+        <button class="btn-share" data-share-id="${escapeHTML(e.id)}" aria-label="Share to X">
+          ${SHARE_SVG} X でシェア
+        </button>
+      </div>
+    </article>
+  `).join('');
+}
+
+function exportCSV() {
+  const headers = ['Phrase', 'Type', 'Meaning (EN)', 'Meaning (JP)', 'Example (EN)', 'Example (JP)', 'Notes', 'Date Added'];
+  const rows = entries.map(e => [e.phrase, e.type, e.meaningEN, e.meaningJP, e.exampleEN, e.exampleJP, e.notes || '', e.dateAdded]);
+  const cell = v => {
+    const s = String(v || '');
+    return /[,"\n]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s;
+  };
+  const csv = [headers, ...rows].map(r => r.map(cell).join(',')).join('\n');
+  download('\uFEFF' + csv, 'my-tango-note.csv', 'text/csv;charset=utf-8;');
+}
+
+function exportJSON() {
+  download(JSON.stringify(entries, null, 2), 'my-tango-note.json', 'application/json');
+}
+
+function shareEntry(id) {
+  const e = entries.find(ent => ent.id === id);
+  if (!e) return;
+
+  // First sentence of meaningJP, truncated if needed
+  let meaning = e.meaningJP.split(/[。\n]/)[0];
+  if (meaning.length > 60) meaning = meaning.substring(0, 57) + '...';
+
+  // exampleEN, truncated if needed
+  let example = e.exampleEN;
+  if (example.length > 100) example = example.substring(0, 97) + '...';
+
+  const text = `今日の単語: "${e.phrase}"
+"${example}"
+
+意味: ${meaning}
+
+#今日のMyTango
+https://mytangonote.com`;
+
+  const url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`;
+  window.open(url, '_blank', 'noopener,noreferrer');
+}
+
+function download(content, filename, type) {
+  const blob = new Blob([content], { type });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = filename;
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+document.getElementById('searchInput').addEventListener('input', e => {
+  searchQuery = e.target.value;
+  renderEntries();
+});
+document.getElementById('sortSelect').addEventListener('change', e => {
+  sortMode = e.target.value;
+  renderEntries();
+});
+
+document.getElementById('entries').addEventListener('click', e => {
+  const speakBtn = e.target.closest('.speak-btn');
+  if (speakBtn) {
+    speak(speakBtn.dataset.speak, speakBtn);
+    return;
+  }
+  const shareBtn = e.target.closest('.btn-share');
+  if (shareBtn) {
+    shareEntry(shareBtn.dataset.shareId);
+    return;
+  }
+});
+
+window.addEventListener('beforeunload', () => {
+  if (speechSupported) window.speechSynthesis.cancel();
+});
+
+renderTypeFilters();
+renderEntries();
+</script>
+</body>
+</html>
