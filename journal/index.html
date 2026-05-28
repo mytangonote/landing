@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Journal — My Tango Note</title>
+  <meta name="description" content="My Tango Note の更新と、その背景を残しています。">
+
+  <!-- OG -->
+  <meta property="og:title" content="Journal — My Tango Note">
+  <meta property="og:description" content="My Tango Note の更新と、その背景を残しています。">
+  <meta property="og:image" content="https://mytangonote.com/og-image.png">
+  <meta property="og:url" content="https://mytangonote.com/journal/">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700&family=Manrope:wght@400;500;700&family=Noto+Sans+JP:wght@400;500;700&family=Space+Mono&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #FFFFFF;
+      --bg-warm: #FFFBF2;
+      --ink: #1A1611;
+      --ink-soft: #5C5448;
+      --ink-faint: #9A8F7D;
+      --accent: #F26C2C;
+      --accent-deep: #D5571B;
+      --yellow: #FFD632;
+      --yellow-soft: #FFE873;
+      --pink: #FF9FB4;
+      --border: #EFE9DC;
+      --border-strong: #DCD0B5;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg-warm);
+      color: var(--ink);
+      font-family: 'Manrope', 'Noto Sans JP', system-ui, sans-serif;
+      font-size: 17px;
+      line-height: 1.8;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ───── TOP NAV ───── */
+    .top-nav {
+      border-bottom: 1px solid var(--border);
+      background: var(--bg-warm);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .top-nav-inner {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 18px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand-mark {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-weight: 700;
+      font-size: 18px;
+      color: var(--ink);
+      text-decoration: none;
+      letter-spacing: -0.01em;
+    }
+
+    .brand-mark .accent {
+      color: var(--accent);
+      font-style: italic;
+    }
+
+    .nav-back {
+      font-family: 'Manrope', sans-serif;
+      font-size: 14px;
+      color: var(--ink-soft);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-back:hover { color: var(--ink); }
+
+    /* ───── MAIN ───── */
+    main {
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 72px 24px 96px;
+    }
+
+    /* ───── PAGE HEADER ───── */
+    .page-header {
+      margin-bottom: 72px;
+    }
+
+    .page-title {
+      font-family: 'Bricolage Grotesque', 'Noto Sans JP', sans-serif;
+      font-size: 42px;
+      line-height: 1.2;
+      font-weight: 700;
+      color: var(--ink);
+      letter-spacing: -0.02em;
+      margin-bottom: 16px;
+    }
+
+    .page-subtitle {
+      font-size: 16px;
+      color: var(--ink-soft);
+      line-height: 1.7;
+    }
+
+    /* ───── ENTRY LIST ───── */
+    .entry-list {
+      list-style: none;
+    }
+
+    .entry {
+      display: block;
+      text-decoration: none;
+      color: inherit;
+      padding: 40px 0;
+      border-top: 1px solid var(--border);
+      transition: transform 0.2s;
+    }
+
+    .entry:first-child {
+      border-top: none;
+      padding-top: 0;
+    }
+
+    .entry:hover .entry-title {
+      color: var(--accent);
+    }
+
+    .entry-date {
+      font-family: 'Space Mono', monospace;
+      font-size: 13px;
+      color: var(--ink-faint);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+
+    .entry-title {
+      font-family: 'Bricolage Grotesque', 'Noto Sans JP', sans-serif;
+      font-size: 26px;
+      line-height: 1.35;
+      font-weight: 700;
+      color: var(--ink);
+      letter-spacing: -0.01em;
+      margin-bottom: 14px;
+      transition: color 0.2s;
+    }
+
+    .entry-excerpt {
+      font-size: 15px;
+      line-height: 1.75;
+      color: var(--ink-soft);
+    }
+
+    /* ───── FOOTER ───── */
+    .page-footer {
+      margin-top: 96px;
+      padding-top: 40px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      align-items: flex-start;
+    }
+
+    .page-footer a {
+      font-size: 14px;
+      color: var(--ink-soft);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .page-footer a:hover {
+      color: var(--ink);
+    }
+
+    /* ───── RESPONSIVE ───── */
+    @media (max-width: 640px) {
+      body { font-size: 16px; }
+
+      main {
+        padding: 48px 20px 72px;
+      }
+
+      .page-title {
+        font-size: 32px;
+      }
+
+      .page-header {
+        margin-bottom: 56px;
+      }
+
+      .entry {
+        padding: 32px 0;
+      }
+
+      .entry-title {
+        font-size: 22px;
+      }
+
+      .entry-excerpt {
+        font-size: 14px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- TOP NAV -->
+  <nav class="top-nav">
+    <div class="top-nav-inner">
+      <a href="/" class="brand-mark">My <span class="accent">Tango</span> Note</a>
+      <a href="/" class="nav-back">← LP に戻る</a>
+    </div>
+  </nav>
+
+  <!-- MAIN -->
+  <main>
+    <!-- PAGE HEADER -->
+    <header class="page-header">
+      <h1 class="page-title">Journal</h1>
+      <p class="page-subtitle">My Tango Note の更新と、その背景を残しています。</p>
+    </header>
+
+    <!-- ENTRY LIST -->
+    <!--
+      ============================================================
+      NOTE: 記事が増えるたびに、ここに新しい <a class="entry"> を
+      追加していきます(新しい記事を上に)。日付・タイトル・抜粋を
+      入れる構造です。
+      ============================================================
+    -->
+    <ul class="entry-list">
+      <li>
+        <a href="/journal/2026-05-26-date-fix/" class="entry">
+          <div class="entry-date">2026.05.26 · NOTE</div>
+          <h2 class="entry-title">日付が、ひとつズレていた話</h2>
+          <p class="entry-excerpt">ある日、AI に単語を訊きました。返ってきたデータには、日付のフィールドがあります。「今日の日付」を入れる項目です。ところが、その日付がひとつズレていました。</p>
+        </a>
+      </li>
+    </ul>
+
+    <!-- PAGE FOOTER -->
+    <footer class="page-footer">
+      <a href="/">← My Tango Note について</a>
+      <a href="/#feedback">感想を送る</a>
+    </footer>
+  </main>
+</body>
+</html>

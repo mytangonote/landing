@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>日付が、ひとつズレていた話 — My Tango Note Journal</title>
+  <meta name="description" content="AI が出力する日付がずれていた話と、品質をどう構造で担保したかについて。">
+
+  <!-- OG -->
+  <meta property="og:title" content="日付が、ひとつズレていた話 — My Tango Note Journal">
+  <meta property="og:description" content="AI が出力する日付がずれていた話と、品質をどう構造で担保したかについて。">
+  <meta property="og:image" content="https://mytangonote.com/og-image.png">
+  <meta property="og:url" content="https://mytangonote.com/journal/2026-05-26-date-fix/">
+  <meta property="og:type" content="article">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700&family=Manrope:wght@400;500;700&family=Noto+Sans+JP:wght@400;500;700&family=Space+Mono&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #FFFFFF;
+      --bg-warm: #FFFBF2;
+      --ink: #1A1611;
+      --ink-soft: #5C5448;
+      --ink-faint: #9A8F7D;
+      --accent: #F26C2C;
+      --accent-deep: #D5571B;
+      --yellow: #FFD632;
+      --yellow-soft: #FFE873;
+      --pink: #FF9FB4;
+      --border: #EFE9DC;
+      --border-strong: #DCD0B5;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg-warm);
+      color: var(--ink);
+      font-family: 'Manrope', 'Noto Sans JP', system-ui, sans-serif;
+      font-size: 17px;
+      line-height: 1.8;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ───── TOP NAV ───── */
+    .top-nav {
+      border-bottom: 1px solid var(--border);
+      background: var(--bg-warm);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .top-nav-inner {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 18px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand-mark {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-weight: 700;
+      font-size: 18px;
+      color: var(--ink);
+      text-decoration: none;
+      letter-spacing: -0.01em;
+    }
+
+    .brand-mark .accent {
+      color: var(--accent);
+      font-style: italic;
+    }
+
+    .nav-back {
+      font-family: 'Manrope', sans-serif;
+      font-size: 14px;
+      color: var(--ink-soft);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-back:hover { color: var(--ink); }
+
+    /* ───── ARTICLE ───── */
+    article {
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 72px 24px 96px;
+    }
+
+    .article-meta {
+      font-family: 'Space Mono', monospace;
+      font-size: 13px;
+      color: var(--ink-faint);
+      letter-spacing: 0.05em;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+    }
+
+    .article-title {
+      font-family: 'Bricolage Grotesque', 'Noto Sans JP', sans-serif;
+      font-size: 38px;
+      line-height: 1.3;
+      font-weight: 700;
+      color: var(--ink);
+      letter-spacing: -0.02em;
+      margin-bottom: 56px;
+    }
+
+    /* ───── ARTICLE BODY ───── */
+    .article-body p {
+      margin-bottom: 1.6em;
+    }
+
+    .article-body p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* 章タイトル(h2)— 本文中で章を区切るために使用 */
+    .article-body h2 {
+      font-family: 'Bricolage Grotesque', 'Noto Sans JP', sans-serif;
+      font-size: 22px;
+      font-weight: 700;
+      margin-top: 2.8em;
+      margin-bottom: 1em;
+      color: var(--ink);
+      letter-spacing: -0.01em;
+    }
+
+    .article-body h2:first-child {
+      margin-top: 0;
+    }
+
+    /* 引用ブロック(プロンプトの抜粋などに使用) */
+    .article-body blockquote {
+      margin: 2em 0;
+      padding: 20px 24px;
+      background: var(--bg);
+      border: 2px solid var(--ink);
+      border-radius: 12px;
+      box-shadow: 0 3px 0 var(--ink);
+      font-family: 'Space Mono', monospace;
+      font-size: 14px;
+      line-height: 1.7;
+      color: var(--ink);
+    }
+
+    /* 図(画像 + キャプション) */
+    .article-body figure {
+      margin: 2.4em 0;
+    }
+
+    .article-body figure img {
+      width: 100%;
+      height: auto;
+      border-radius: 12px;
+      border: 2px solid var(--ink);
+      box-shadow: 0 3px 0 var(--ink);
+      display: block;
+    }
+
+    .article-body figcaption {
+      margin-top: 12px;
+      font-size: 13px;
+      color: var(--ink-soft);
+      text-align: center;
+      font-style: italic;
+    }
+
+    /* 強調 */
+    .article-body strong {
+      font-weight: 700;
+      color: var(--ink);
+    }
+
+    .article-body em {
+      font-style: italic;
+      color: var(--ink);
+    }
+
+    /* インラインリンク */
+    .article-body a {
+      color: var(--accent);
+      text-decoration: underline;
+      text-decoration-thickness: 1.5px;
+      text-underline-offset: 3px;
+      transition: color 0.2s;
+    }
+
+    .article-body a:hover {
+      color: var(--accent-deep);
+    }
+
+    /* ───── ARTICLE FOOTER ───── */
+    .article-footer {
+      margin-top: 80px;
+      padding-top: 40px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      align-items: flex-start;
+    }
+
+    .article-footer a {
+      font-size: 14px;
+      color: var(--ink-soft);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .article-footer a:hover {
+      color: var(--ink);
+    }
+
+    /* ───── RESPONSIVE ───── */
+    @media (max-width: 640px) {
+      body { font-size: 16px; }
+
+      article {
+        padding: 48px 20px 72px;
+      }
+
+      .article-title {
+        font-size: 28px;
+        margin-bottom: 40px;
+      }
+
+      .article-body h2 {
+        font-size: 19px;
+        margin-top: 2.4em;
+      }
+
+      .article-body blockquote {
+        padding: 16px 18px;
+        font-size: 13px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- TOP NAV -->
+  <nav class="top-nav">
+    <div class="top-nav-inner">
+      <a href="/" class="brand-mark">My <span class="accent">Tango</span> Note</a>
+      <a href="/journal/" class="nav-back">← Journal 一覧へ</a>
+    </div>
+  </nav>
+
+  <!-- ARTICLE -->
+  <!--
+    ============================================================
+    NOTE: 本文は構造確認用のダミーです。
+    Mark さんの本番コピーで <article-body> 内を上書きしてください。
+    800字を想定。3章構成(更新したこと / なぜやったか / これから)で
+    書いてあります。h2 で章を区切る方針です。
+    ============================================================
+  -->
+  <article>
+    <div class="article-meta">2026.05.26 · NOTE</div>
+    <h1 class="article-title">日付が、ひとつズレていた話</h1>
+
+    <div class="article-body">
+      <h2>更新したこと</h2>
+      <p>AI スタータープロンプトの「注意点」セクションに、日付の確認を促す一文を加えました。これまではフォーマット指示しかなかったところに、「dateAdded を書く前に、今日の日付を必ず確認してください」という確認の指示を明示しています。</p>
+
+      <h2>なぜやったか</h2>
+      <p>ある日、AI に単語を訊きました。返ってきたデータには、日付のフィールドがあります。「今日の日付」を入れる項目です。</p>
+
+      <p>ところが、その日付がひとつズレていました。前日になっていた。一度ではなく、四回連続で。最初は気づきませんでした。途中で違和感に気づいて指摘すると、AI はすぐに直してくれた。</p>
+
+      <p>なぜ起きたのか。確かめてみると、原因はシンプルでした。AI 自身は今日の日付を知っている。けれども、こちらが渡しているプロンプトに「YYYY-MM-DD 形式の今日の日付」とだけ書いてあったため、確認せずに文脈の流れで日付を生成してしまった。</p>
+
+      <p>これは AI のミスです。同時に、プロンプトの構造的な弱さでもあります。「フォーマットを指示する」のと「確認を促す」のは、別の指示なのだということ。</p>
+
+      <blockquote>dateAdded を書く前に、今提供されている今日の日付を必ず確認してください。前回のやりとりや、会話の文脈から推測した日付は使わないでください。日付が判断できない場合は、確認のうえユーザーに尋ねてください。</blockquote>
+
+      <h2>これから</h2>
+      <p>この修正自体は、小さなものです。でも、「AI に丸投げにせず、ちゃんとユーザーが信頼できる体験にする」という姿勢の話でもあると思っています。My Tango Note は、AI 時代に「自分で英語と向き合う」ためのノートです。だからこそ、AI が間違えうる部分は、私たちの側で構造化しておきたい。</p>
+
+      <p>ちいさな違和感を見つけたら、ちゃんと直していきます。</p>
+    </div>
+
+    <!-- ARTICLE FOOTER -->
+    <footer class="article-footer">
+      <a href="/journal/">← Journal 一覧へ</a>
+      <a href="/#feedback">感想を送る</a>
+    </footer>
+  </article>
+</body>
+</html>
