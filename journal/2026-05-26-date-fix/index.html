@@ -200,15 +200,42 @@
       color: var(--accent-deep);
     }
 
+    /* インライン code(ファイル名など) */
+    .article-body code {
+      font-family: 'Space Mono', monospace;
+      background: rgba(0, 0, 0, 0.05);
+      color: var(--ink);
+      padding: 1px 6px;
+      border-radius: 4px;
+      font-size: 0.9em;
+    }
+
     /* ───── ARTICLE FOOTER ───── */
     .article-footer {
       margin-top: 80px;
       padding-top: 40px;
       border-top: 1px solid var(--border);
       display: flex;
-      flex-direction: column;
-      gap: 16px;
-      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 24px;
+      align-items: center;
+    }
+
+    .article-footer .share-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--ink-soft);
+      transition: color 0.2s, transform 0.2s;
+    }
+
+    .article-footer .share-icon:hover {
+      color: var(--ink);
+      transform: translateY(-1px);
+    }
+
+    .article-footer .share-icon svg {
+      display: block;
     }
 
     .article-footer a {
@@ -271,24 +298,31 @@
     <h1 class="article-title">日付が、ひとつズレていた話</h1>
 
     <div class="article-body">
-      <h2>更新したこと</h2>
-      <p>AI スタータープロンプトの「注意点」セクションに、日付の確認を促す一文を加えました。これまではフォーマット指示しかなかったところに、「dateAdded を書く前に、今日の日付を必ず確認してください」という確認の指示を明示しています。</p>
+      <p>My Tango Note は、AI に訊いた英単語を自分のノートに残していくためのキットです。今回、その AI 用プロンプトを更新しました。AI が今日の日付を取り違えることがあったので、それを防ぐ修正です。</p>
 
-      <h2>なぜやったか</h2>
-      <p>ある日、AI に単語を訊きました。返ってきたデータには、日付のフィールドがあります。「今日の日付」を入れる項目です。</p>
+      <h2>何をしたか</h2>
+      <p>AI スタータープロンプトに、今日の日付を確認させる指示を追加しました。これまでは日付の「形式」を指示するだけで、「確認」を促す指示がありませんでした。</p>
 
-      <p>ところが、その日付がひとつズレていました。前日になっていた。一度ではなく、四回連続で。最初は気づきませんでした。途中で違和感に気づいて指摘すると、AI はすぐに直してくれた。</p>
-
-      <p>なぜ起きたのか。確かめてみると、原因はシンプルでした。AI 自身は今日の日付を知っている。けれども、こちらが渡しているプロンプトに「YYYY-MM-DD 形式の今日の日付」とだけ書いてあったため、確認せずに文脈の流れで日付を生成してしまった。</p>
-
-      <p>これは AI のミスです。同時に、プロンプトの構造的な弱さでもあります。「フォーマットを指示する」のと「確認を促す」のは、別の指示なのだということ。</p>
+      <p>変更したのは、配布キットに含まれるスタータープロンプト(<code>02.AI設定プロンプト.txt</code>)の「注意点」セクションです。次の一文を追加しています。</p>
 
       <blockquote>dateAdded を書く前に、今提供されている今日の日付を必ず確認してください。前回のやりとりや、会話の文脈から推測した日付は使わないでください。日付が判断できない場合は、確認のうえユーザーに尋ねてください。</blockquote>
+
+      <p>あわせて、配布物(MyTangoNote.zip)を再生成し、LP から配信される版を更新しました。すでにキットをお持ちの場合は、最新版をダウンロードし直すと、この指示が反映されます。</p>
+
+      <h2>なぜやるのか</h2>
+      <p>My Tango Note は、リリースしてから自分でも毎日使っています。あるとき、AI から返ってきた内容を見ていて、日付が更新されていないことに気づきました。同じ日に追加したいくつかの単語にも、過去の日付がそのまま残っていました。</p>
+
+      <p>指摘すると、AI はその場で直しました。ただこのとき、AI の「時間」や「日付」の感覚は、人間とは違うのだと思い出しました。</p>
+
+      <p>以前から、こんなことがあります。夜に「今日はもう寝ます、また明日」と書いて会話を終えると、AI は「今日はよく頑張りましたね。ゆっくり休んでください。また明日」と返します。ところが翌朝、同じ会話の続きから作業を再開すると、「おやすみなさい」と言われることがあります。AI にとっては、夜も朝も地続きの、一つの会話だからです。</p>
+
+      <p>今回も、同じでした。AI の中で日付や時間は切り替わっておらず、一連のやりとりが、ひとつながりの会話として扱われていたのです。なので、会話の流れに任せず、書く前にいまの日付を確かめてもらう一文を、プロンプトに加えました。</p>
     </div>
 
     <!-- ARTICLE FOOTER -->
     <footer class="article-footer">
       <a href="/journal/">← Journal 一覧へ</a>
+      <a href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fmytangonote.com%2Fjournal%2F2026-05-26-date-fix%2F&text=%E6%97%A5%E4%BB%98%E3%81%8C%E3%80%81%E3%81%B2%E3%81%A8%E3%81%A4%E3%82%BA%E3%83%AC%E3%81%A6%E3%81%84%E3%81%9F%E8%A9%B1%20%E2%80%94%20My%20Tango%20Note%20Journal" target="_blank" rel="noopener" class="share-icon" aria-label="X でシェア"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
       <a href="/#feedback">感想を送る</a>
     </footer>
   </article>
